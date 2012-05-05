@@ -152,10 +152,10 @@
     for(NSMutableDictionary * store  in stores)  
     {  
         
-        NSLog(@"Name: %@",[[store objectForKey:@"Name"] description]);
-        NSLog(@"PostalCode: %@",[[store objectForKey:@"PostalCode"] description]); 
-        NSLog(@"LocationX: %@",[[store objectForKey:@"LocationX"] description]); 
-        NSLog(@"LocatoinY: %@",[[store objectForKey:@"LocatoinY"] description]);
+        //NSLog(@"Name: %@",[[store objectForKey:@"StoreID"] description]);
+        //NSLog(@"PostalCode: %@",[[store objectForKey:@"PostalCode"] description]); 
+       //NSLog(@"LocationX: %@",[[store objectForKey:@"LocationX"] description]); 
+       // NSLog(@"LocatoinY: %@",[[store objectForKey:@"LocatoinY"] description]);
     } 
     
     
@@ -164,143 +164,6 @@
 
 }
 
-/*
-
--(BOOL)saveContact:(NSString *)firstName withLastName:(NSString *)lastName 
-  withContactEmail:(NSString *)contactEmail withCompanyName:(NSString *)companyName 
- withContactNumber:(NSString *)contactNumber withContactWebSite:(NSString *)contactWebSite withContactTitle:(NSString *)contactTitle withStreet:(NSString *)street 
-          withCity:(NSString *) city withZip:(NSString *) zip withState:(NSString *)state 
-        withCoutry:(NSString *)country{
-    NSLog(@"come to saveContact");
-    ABRecordRef aRecord = ABPersonCreate(); 
-	CFErrorRef  anError = NULL; 
-    
-    // First Name & Last Name
-	ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
-					 (__bridge CFStringRef)firstName, &anError); 
-	ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
-					 (__bridge CFStringRef)lastName, &anError); 
-    
-    // Company Number
-    ABRecordSetValue(aRecord, kABPersonOrganizationProperty, (__bridge CFStringRef)companyName, &anError);
-    
-    // Phone Number.
-    ABMutableMultiValueRef multi = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multi, (__bridge CFStringRef)contactNumber, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonPhoneProperty, multi, &anError);
-    
-    // ADDRESS
-    ABMutableMultiValueRef addressmuti = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)street, kABPersonAddressStreetKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)city, kABPersonAddressCityKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)state,kABPersonAddressStateKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)zip, kABPersonAddressZIPKey, NULL);
-    
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)country, kABPersonAddressCountryKey, NULL);
-    
-    
-    ABRecordSetValue(aRecord, kABPersonPhoneProperty, addressmuti, &anError);
-    // Email
-    ABMutableMultiValueRef multiemail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multiemail, (__bridge CFStringRef)contactEmail, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonEmailProperty, multiemail, &anError);
-    
-    
-    // Website
-    ABMutableMultiValueRef multiweb = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multiweb, (__bridge CFStringRef)contactWebSite, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonURLProperty, multiweb, &anError);
-    
-    
-    // Title
-    ABRecordSetValue(aRecord, kABPersonJobTitleProperty, 
-                     (__bridge CFStringRef)contactTitle, &anError);
-    
-    
-    
-	if (anError != NULL) { 
-		
-		NSLog(@"error while creating..");
-	} 
-    
-	
-	ABAddressBookRef addressBook; 
-	CFErrorRef error = NULL; 
-	addressBook = ABAddressBookCreate(); 
-	
-	BOOL isAdded = ABAddressBookAddRecord (
-                                           addressBook,
-                                           aRecord,
-                                           &error
-                                           );
-	if(isAdded){
-		
-		NSLog(@"added..");
-        
-        NSLog(@"come to isadded true");
-        
-        //ABRecordSetValue(aRecord, kABPersonEmailProperty, @"pattyuan@gmail.com", &anError);
-		if (anError == NULL)
-		{
-            
-            NSLog(@"come to picker");
-			ABUnknownPersonViewController *picker = [[ABUnknownPersonViewController alloc] init];
-			picker.unknownPersonViewDelegate = self;
-			picker.displayedPerson = aRecord;
-			picker.allowsAddingToAddressBook = YES;
-		    picker.allowsActions = YES;
-			picker.alternateName = @"SHop 2";
-			picker.title = @"project 11 Appleseed";
-			picker.message = @"nus Company, Inc";
-			[self.navigationController pushViewController:picker animated:YES];
-			//[picker release];
-            
-        }
-        if (error != NULL) {
-            NSLog(@"ABAddressBookAddRecord %@", error);
-        } 
-        error = NULL;
-        
-        BOOL isSaved = ABAddressBookSave (
-                                          addressBook,
-                                          &error
-                                          );
-        
-        if(isSaved){
-            
-            NSLog(@"saved..");
-            
-        }
-		else 
-		{
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-															message:@"Could not create unknown user" 
-														   delegate:nil 
-												  cancelButtonTitle:@"Cancel"
-												  otherButtonTitles:nil];
-			[alert show];
-			//[alert release];
-		}
-        
-	}
-    
-    
-    
-	
-	if (error != NULL) {
-		NSLog(@"ABAddressBookSave %@", error);
-        return FALSE;
-	} 
-	
-	CFRelease(aRecord); 
-	CFRelease(multiemail);
-    CFRelease(multiweb);
-    CFRelease(multi);
-    CFRelease(addressBook);
-    return TRUE;
-    
-}
- */
 
 -(BOOL)saveContact:(NSString *)storeID{
     NSMutableArray *stores = [self getStoreList];
@@ -309,17 +172,21 @@
     for(NSMutableDictionary * store  in stores)  
     {  
     
-        if([storeID isEqualToString:[[store objectForKey:@"Name"] description]]){
+        if([storeID isEqualToString:[[store objectForKey:@"StoreID"] description]]){
             NSString *firstName = [[store objectForKey:@"Name"] description];
             NSString *postalCode = [[store objectForKey:@"PostalCode"] description];
+            NSString *hotline = [[store objectForKey:@"Hotline"] description];
+            NSString *street = [[store objectForKey:@"Address1"] description];
+            street = [street stringByAppendingFormat:@",%@",[[store objectForKey:@"Address2"] description]];
+            NSString *companyName = @"imenu Pte Ltd";
+            // Email
+            NSString *email = @"imenu@gmail.com";
             NSLog(@"Name: %@",firstName);
             NSLog(@"PostalCode: %@",postalCode); 
-            //NSLog(@"LocationX: %@",[[store objectForKey:@"LocationX"] description]); 
-            //NSLog(@"LocatoinY: %@",[[store objectForKey:@"LocatoinY"] description]);
+            NSLog(@"hotline: %@",hotline); 
+            NSLog(@"street: %@",street); 
             
-
             // create addresses 
-            
             ABRecordRef aRecord = ABPersonCreate();
             CFErrorRef  anError = NULL; 
             // First Name & Last Name
@@ -329,27 +196,25 @@
                             // (__bridge CFStringRef)lastName, &anError);
             
             // Company Number
-            ABRecordSetValue(aRecord, kABPersonOrganizationProperty, (__bridge CFStringRef)@"imenu Pte Ltd", &anError);
+            ABRecordSetValue(aRecord, kABPersonOrganizationProperty, (__bridge CFStringRef)companyName, &anError);
             
             // Phone Number.
             ABMutableMultiValueRef multi = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-            ABMultiValueAddValueAndLabel(multi, (__bridge CFStringRef)@"98232232", kABWorkLabel, NULL);
+            ABMultiValueAddValueAndLabel(multi, (__bridge CFStringRef)hotline, kABPersonPhoneMobileLabel, NULL);
             ABRecordSetValue(aRecord, kABPersonPhoneProperty, multi, &anError);
             
             
             // ADDRESS
             ABMutableMultiValueRef addressmuti = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-            //ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)street, kABPersonAddressStreetKey, NULL);
+            ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)street, kABPersonAddressStreetKey, NULL);
             ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)@"Singapore", kABPersonAddressCityKey, NULL);
-            ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)@"Singapore",kABPersonAddressStateKey, NULL);
             ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)postalCode, kABPersonAddressZIPKey, NULL);
             
             ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)@"Singapore", kABPersonAddressCountryKey, NULL);
             
             ABRecordSetValue(aRecord, kABPersonPhoneProperty, addressmuti, &anError);
             
-            // Email
-            NSString *email = @"pattytest";
+            
             ABMutableMultiValueRef multiemail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
             ABMultiValueAddValueAndLabel(multiemail, (__bridge CFStringRef)email, kABWorkLabel, NULL);
             ABRecordSetValue(aRecord, kABPersonEmailProperty, multiemail, &anError);
@@ -385,24 +250,17 @@
                                                    );
             if(isAdded){
                 
-                NSLog(@"added..");
-                
-                NSLog(@"come to isadded true");
-                
-                //ABRecordSetValue(aRecord, kABPersonEmailProperty, @"pattyuan@gmail.com", &anError);
+            
                 if (anError == NULL)
                 {
-                    
-                    
-                    NSLog(@"come to picker");
                     ABUnknownPersonViewController *picker = [[ABUnknownPersonViewController alloc] init];
                    // picker.unknownPersonViewDelegate = self;
                     picker.displayedPerson = aRecord;
                     picker.allowsAddingToAddressBook = YES;
                     picker.allowsActions = YES;
-                    picker.alternateName = @"SHop 2";
-                    picker.title = @"project 11 Appleseed";
-                    picker.message = @"nus Company, Inc";
+                    picker.alternateName = firstName;
+                    picker.title = firstName;
+                    picker.message = companyName;
                     [self.navigationController pushViewController:picker animated:YES];
                     //[picker release];
                      
@@ -411,6 +269,7 @@
                 if (error != NULL) {
                     NSLog(@"ABAddressBookAddRecord %@", error);
                 } 
+                /*
                 error = NULL;
                 
                 BOOL isSaved = ABAddressBookSave (
@@ -432,17 +291,17 @@
                                                           otherButtonTitles:nil];
                     [alert show];
                     //[alert release];
-                }
+                }*/
                 
             }
             
             
-            
+            /*
             
             if (error != NULL) {
                 NSLog(@"ABAddressBookSave %@", error);
                 return FALSE;
-            } 
+            } */
             
             CFRelease(aRecord); 
             CFRelease(multiemail);
@@ -454,138 +313,8 @@
         
         
     }   
-    
-    /*
-    
-    NSLog(@"come to saveContact");
-    ABRecordRef aRecord = ABPersonCreate(); 
-	CFErrorRef  anError = NULL; 
-    
-    // First Name & Last Name
-	ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
-					 (__bridge CFStringRef)firstName, &anError); 
-	ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
-					 (__bridge CFStringRef)lastName, &anError); 
-    
-    // Company Number
-    ABRecordSetValue(aRecord, kABPersonOrganizationProperty, (__bridge CFStringRef)companyName, &anError);
-    
-    // Phone Number.
-    ABMutableMultiValueRef multi = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multi, (__bridge CFStringRef)contactNumber, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonPhoneProperty, multi, &anError);
-    
-    // ADDRESS
-    ABMutableMultiValueRef addressmuti = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)street, kABPersonAddressStreetKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)city, kABPersonAddressCityKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)state,kABPersonAddressStateKey, NULL);
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)zip, kABPersonAddressZIPKey, NULL);
-    
-    ABMultiValueAddValueAndLabel(addressmuti, (__bridge CFStringRef)country, kABPersonAddressCountryKey, NULL);
-    
-    
-    ABRecordSetValue(aRecord, kABPersonPhoneProperty, addressmuti, &anError);
-    // Email
-    ABMutableMultiValueRef multiemail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multiemail, (__bridge CFStringRef)contactEmail, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonEmailProperty, multiemail, &anError);
-    
-    
-    // Website
-    ABMutableMultiValueRef multiweb = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multiweb, (__bridge CFStringRef)contactWebSite, kABWorkLabel, NULL);
-    ABRecordSetValue(aRecord, kABPersonURLProperty, multiweb, &anError);
-    
-    
-    // Title
-    ABRecordSetValue(aRecord, kABPersonJobTitleProperty, 
-                     (__bridge CFStringRef)contactTitle, &anError);
-    
-    
-    
-	if (anError != NULL) { 
-		
-		NSLog(@"error while creating..");
-	} 
-    
-	
-	ABAddressBookRef addressBook; 
-	CFErrorRef error = NULL; 
-	addressBook = ABAddressBookCreate(); 
-	
-	BOOL isAdded = ABAddressBookAddRecord (
-                                           addressBook,
-                                           aRecord,
-                                           &error
-                                           );
-	if(isAdded){
-		
-		NSLog(@"added..");
-        
-        NSLog(@"come to isadded true");
-        
-        //ABRecordSetValue(aRecord, kABPersonEmailProperty, @"pattyuan@gmail.com", &anError);
-		if (anError == NULL)
-		{
-            
-            NSLog(@"come to picker");
-			ABUnknownPersonViewController *picker = [[ABUnknownPersonViewController alloc] init];
-			picker.unknownPersonViewDelegate = self;
-			picker.displayedPerson = aRecord;
-			picker.allowsAddingToAddressBook = YES;
-		    picker.allowsActions = YES;
-			picker.alternateName = @"SHop 2";
-			picker.title = @"project 11 Appleseed";
-			picker.message = @"nus Company, Inc";
-			[self.navigationController pushViewController:picker animated:YES];
-			//[picker release];
-            
-        }
-        if (error != NULL) {
-            NSLog(@"ABAddressBookAddRecord %@", error);
-        } 
-        error = NULL;
-        
-        BOOL isSaved = ABAddressBookSave (
-                                          addressBook,
-                                          &error
-                                          );
-        
-        if(isSaved){
-            
-            NSLog(@"saved..");
-            
-        }
-		else 
-		{
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-															message:@"Could not create unknown user" 
-														   delegate:nil 
-												  cancelButtonTitle:@"Cancel"
-												  otherButtonTitles:nil];
-			[alert show];
-			//[alert release];
-		}
-        
-	}
-    
-    
-    
-	
-	if (error != NULL) {
-		NSLog(@"ABAddressBookSave %@", error);
-        return FALSE;
-	} 
-	
-	CFRelease(aRecord); 
-	CFRelease(multiemail);
-    CFRelease(multiweb);
-    CFRelease(multi);
-    CFRelease(addressBook);
-     
-     */
-    return TRUE;
+
+    return FALSE;
     
 }
 

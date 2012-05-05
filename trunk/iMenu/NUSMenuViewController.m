@@ -181,20 +181,21 @@
     
     NUSWebService *webserviceModel = [[NUSWebService alloc] init];
     NSString *loginResult = [webserviceModel getRespone:loginRequest];
-    NSLog(@"login result%@", loginResult);
+
     
-    NSString *result = [webserviceModel getLoginResponse:loginResult];
-    //NSLog(@"result:%@",result);
-    
-    //0=Password Fail,1=Success,2=User ID not found.
+    NSString *result = [[NSString alloc] initWithFormat:@"%@", [webserviceModel getLoginResponse:loginResult]];
+
+    //0=Password Fail,1=Success,-2=User ID not found.
     if([@"1" isEqualToString:result])
+        
     {
+        NSLog(@"come to login success");
         [_loginHUD stopIndicators];
         _loginHUD.labelText =  @"Succeed";
         _flagCancelLogin=1;
         [_loginBarButtonItem setTitle:@"Logout"];
     }
-    else if([@"2" isEqualToString:result])
+    else if([@"-2" isEqualToString:result])
     {
         [_loginHUD stopIndicators];
         _loginHUD.labelText =  @"User ID not found";
@@ -202,7 +203,6 @@
         
         [_loginHUD stopIndicators];
         _loginHUD.labelText =  @"password invalid";
-    
     
     }
     
