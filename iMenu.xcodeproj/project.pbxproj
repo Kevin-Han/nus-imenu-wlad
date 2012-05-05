@@ -41,6 +41,7 @@
 		56EC44F31544334A0060D664 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44C91544334A0060D664 /* Foundation.framework */; };
 		56EC44FB1544334A0060D664 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44F91544334A0060D664 /* InfoPlist.strings */; };
 		56EC44FE1544334A0060D664 /* iMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 56EC44FD1544334A0060D664 /* iMenuTests.m */; };
+		5CA112E81555173F001B0C8D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA112E71555173F001B0C8D /* MessageUI.framework */; };
 		8F9DC6F3154AC786005E1B71 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9DC6F2154AC786005E1B71 /* MapAnnotation.m */; };
 		DD03F2AD154687AA009CBEA3 /* NUSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD03F2AB154687A9009CBEA3 /* NUSMenuViewController.m */; };
 		DD03F2AF15468883009CBEA3 /* NUSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD03F2AE15468883009CBEA3 /* NUSMapViewController.m */; };
@@ -129,7 +130,7 @@
 		56EC44D51544334A0060D664 /* iMenu-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMenu-Prefix.pch"; sourceTree = "<group>"; };
 		56EC44D61544334A0060D664 /* NUSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUSAppDelegate.h; sourceTree = "<group>"; };
 		56EC44D71544334A0060D664 /* NUSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NUSAppDelegate.m; sourceTree = "<group>"; };
-		56EC44DA1544334A0060D664 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		56EC44DA1544334A0060D664 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		56EC44DF1544334A0060D664 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = first.png; path = ../first.png; sourceTree = "<group>"; };
 		56EC44E11544334A0060D664 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "first@2x.png"; path = "../first@2x.png"; sourceTree = "<group>"; };
 		56EC44E61544334A0060D664 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = second.png; path = ../second.png; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		56EC44FA1544334A0060D664 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56EC44FC1544334A0060D664 /* iMenuTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iMenuTests.h; sourceTree = "<group>"; };
 		56EC44FD1544334A0060D664 /* iMenuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iMenuTests.m; sourceTree = "<group>"; };
+		5CA112E71555173F001B0C8D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8F9DC6F1154AC786005E1B71 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		8F9DC6F2154AC786005E1B71 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		DD03F2A8154687A9009CBEA3 /* NUSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUSMapViewController.h; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA112E81555173F001B0C8D /* MessageUI.framework in Frameworks */,
 				4B9839CF15541D4300FB79EC /* AddressBook.framework in Frameworks */,
 				4B9839D015541D4300FB79EC /* AddressBookUI.framework in Frameworks */,
 				263B19C9154C4A320033798E /* CoreLocation.framework in Frameworks */,
@@ -245,6 +248,7 @@
 		56EC44B81544334A0060D664 = {
 			isa = PBXGroup;
 			children = (
+				5CA112E71555173F001B0C8D /* MessageUI.framework */,
 				56EC44CD1544334A0060D664 /* Class */,
 				56EC44CE1544334A0060D664 /* Supporting Files */,
 				DDEA291815463DDC00C0B219 /* Resource */,
