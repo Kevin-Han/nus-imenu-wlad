@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+    </dependencies>
+    <scenes>
+        <!--Menu View Controller - Menu-->
+        <scene sceneID="11">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
+                <viewController title="Menu" id="2" customClass="NUSMenuViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jgg-gr-MoA">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="e9V-Rt-LBF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="dEk-kc-Lc0"/>
+                                    <outlet property="delegate" destination="2" id="aFa-D3-JMY"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Menu" image="menu.png" id="7"/>
+                    <navigationItem key="navigationItem" title="Menu" id="rfb-7R-VEF">
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="cud-TZ-GuK">
+                            <connections>
+                                <action selector="loginBarButtonAction:" destination="2" id="mpd-no-Fhj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Order" id="K0P-dz-EGY">
+                            <connections>
+                                <action selector="orderBarButtonAction:" destination="2" id="xiI-Ec-nRZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="loginBarButtonItem" destination="cud-TZ-GuK" id="Aq9-ZR-cCo"/>
+                        <outlet property="menuTableView" destination="e9V-Rt-LBF" id="fXL-T9-CaZ"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="681" y="-120"/>
+        </scene>
+        <!--Menu Detail View Controller-->
+        <scene sceneID="9Ec-d3-Rcb">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eh5-O4-Vkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MenuDetail" id="cZ8-gC-foV" customClass="NUSMenuDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jnh-ge-65p">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="2Na-7g-ygc">
+                                <rect key="frame" x="30" y="44" width="260" height="160"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" text="Food Detail " lineBreakMode="headTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" minimumFontSize="8" id="3TR-AP-1cJ">
+                                <rect key="frame" x="20" y="165" width="280" height="177"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EbA-qm-EWH"/>
+                    <connections>
+                        <outlet property="detailUILable" destination="3TR-AP-1cJ" id="sDZ-DZ-7gr"/>
+                        <outlet property="photoUIImageView" destination="2Na-7g-ygc" id="k4U-VO-gt0"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1099" y="-120"/>
+        </scene>
+        <!--Navigation Controller - Map-->
+        <scene sceneID="eDC-bx-qy2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mD7-af-cS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="Map" definesPresentationContext="YES" id="rBB-cV-WB3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="second.png" id="lEa-j2-huG"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="7Vj-hl-d1g">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3" kind="relationship" relationship="rootViewController" id="iA3-Kk-yaX"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="155" y="525"/>
+        </scene>
+        <!--Map View Controller - Map-->
+        <scene sceneID="13">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
+                <viewController title="Map" id="3" customClass="NUSMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="17">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Idf-xQ-bjg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3" id="EvF-j8-fAg"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map.png" id="6"/>
+                    <navigationItem key="navigationItem" title="Map" id="qVP-Rk-rA8"/>
+                    <connections>
+                        <outlet property="shopMap" destination="Idf-xQ-bjg" id="fuS-8Q-G6H"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="681" y="532"/>
+        </scene>
+        <!--Navigation Controller - Settings-->
+        <scene sceneID="UKE-U7-d0r">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8bN-1E-FMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="Settings" definesPresentationContext="YES" id="hKm-c0-Y5R" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="him-Cp-0Fi"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="x6P-fA-kZP">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3jL-Al-2Vg" kind="relationship" relationship="rootViewController" id="ayW-Ph-J2f"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="155" y="1124"/>
+        </scene>
+        <!--Settings View Controller - Settings-->
+        <scene sceneID="ibs-Oz-GHD">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a16-nz-tjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="3jL-Al-2Vg" customClass="NUSSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ts5-q6-kQf">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3jL-Al-2Vg" id="uzo-m6-VuJ"/>
+                            <outlet property="delegate" destination="3jL-Al-2Vg" id="t8g-nv-OV9"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings.png" id="34O-JM-Gib"/>
+                    <navigationItem key="navigationItem" title="Settings" id="TGZ-BB-ar8">
+                        <barButtonItem key="rightBarButtonItem" title="Sign Up" id="kEe-fD-B4F">
+                            <connections>
+                                <action selector="signUp:" destination="3jL-Al-2Vg" id="9PF-B3-RoK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="680" y="1124"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="15">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
+                <tabBarController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="4" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="5">
+                        <rect key="frame" x="0.0" y="431" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZIc-et-uk7" kind="relationship" relationship="viewControllers" id="UtZ-MC-Yf2"/>
+                        <segue destination="rBB-cV-WB3" kind="relationship" relationship="viewControllers" id="cZ4-IR-tu4"/>
+                        <segue destination="hKm-c0-Y5R" kind="relationship" relationship="viewControllers" id="knQ-CW-WXL"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-450" y="342"/>
+        </scene>
+        <!--Navigation Controller - Menu-->
+        <scene sceneID="bUY-y7-BQA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygM-HF-oRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="Menu" definesPresentationContext="YES" id="ZIc-et-uk7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Menu" image="first.png" id="bhe-iz-cLn"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="eNF-Ce-KpL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="x5J-Cg-vqw"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="155" y="-120"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first.png" width="30" height="30"/>
+        <image name="map.png" width="30" height="30"/>
+        <image name="menu.png" width="30" height="30"/>
+        <image name="second.png" width="30" height="30"/>
+        <image name="settings.png" width="30" height="30"/>
+    </resources>
+    <classes>
+        <class className="NUSMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="shopMap" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="NUSMenuDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailUILable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoUIImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NUSMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginBarButtonAction:"/>
+                <relationship kind="action" name="orderBarButtonAction:"/>
+                <relationship kind="outlet" name="loginBarButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="menuTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NUSSettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="signUp:"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

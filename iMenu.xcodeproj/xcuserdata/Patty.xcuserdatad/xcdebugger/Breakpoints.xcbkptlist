@@ -86,19 +86,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iMenu/NUSMapViewController.m"
-         timestampString = "357836383.876943"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
-         landmarkName = "-mapView:annotationView:calloutAccessoryControlTapped:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iMenu/NUSMapViewController.m"
          timestampString = "357836464.587099"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
