@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>ID</key>
+		<string>A00001</string>
+		<key>Name</key>
+		<string>Apple Pie      </string>
+		<key>NumRatings</key>
+		<integer>106</integer>
+		<key>Rating</key>
+		<real>3.5</real>
+		<key>Price</key>
+		<string>$2.99</string>
+		<key>Icon</key>
+		<string>ApplePie.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>ApplePie2x.png</string>
+	</dict>
+	<dict>
+		<key>ID</key>
+		<string>A00002</string>
+		<key>Name</key>
+		<string>Lemon Pie      </string>
+		<key>NumRatings</key>
+		<integer>114</integer>
+		<key>Rating</key>
+		<real>4.5</real>
+		<key>Price</key>
+		<string>$2.99</string>
+		<key>Icon</key>
+		<string>LemonPie.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>LemonPie2x.png</string>
+	</dict>
+	<dict>
+		<key>ID</key>
+		<string>A00003</string>
+		<key>Name</key>
+		<string>Milk Pudding   </string>
+		<key>NumRatings</key>
+		<integer>87</integer>
+		<key>Rating</key>
+		<integer>4</integer>
+		<key>Price</key>
+		<string>$3.99</string>
+		<key>Icon</key>
+		<string>MilkPudding.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>MilkPudding2x.png</string>
+	</dict>
+	<dict>
+		<key>ID</key>
+		<string>A00004</string>
+		<key>Name</key>
+		<string>Cream Roll     </string>
+		<key>NumRatings</key>
+		<integer>254</integer>
+		<key>Rating</key>
+		<real>3</real>
+		<key>Price</key>
+		<string>$1.99</string>
+		<key>Icon</key>
+		<string>CreamRoll.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>CreamRoll2x.png</string>
+	</dict>
+	<dict>
+		<key>ID</key>
+		<string>A00005</string>
+		<key>Name</key>
+		<string>Cheese Sandwich</string>
+		<key>NumRatings</key>
+		<integer>422</integer>
+		<key>Rating</key>
+		<real>3</real>
+		<key>Price</key>
+		<string>$4.99</string>
+		<key>Icon</key>
+		<string>CheeseSandwich.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>CheeseSandwich2x.png</string>
+	</dict>
+	<dict>
+		<key>ID</key>
+		<string>A00006</string>
+		<key>Name</key>
+		<string>Beef Sandwich  </string>
+		<key>NumRatings</key>
+		<integer>45</integer>
+		<key>Rating</key>
+		<real>4</real>
+		<key>Price</key>
+		<string>$4.99</string>
+		<key>Icon</key>
+		<string>BeefSandwich.png</string>
+		<key>Detail</key>
+		<string>Amount Per Serving
+Calories                                   405.5  
+Dietary Fiber                            3.3   g                 
+Sugars                                     41.1 g 
+Total Fat                                  15.4 g                     
+Total Carbohydrate                 65.8 g                         
+
+Amount Serving Size: 1           169 g</string>
+		<key>Image</key>
+		<string>BeefSandwich2x.png</string>
+	</dict>
+</array>
+</plist>
