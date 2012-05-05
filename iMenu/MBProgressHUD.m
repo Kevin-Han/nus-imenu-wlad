@@ -468,7 +468,7 @@
 			
             // Set label position and dimensions
             CGRect lFrameD = CGRectMake(floorf((frame.size.width - lWidth) / 2) + xOffset,
-                                        lFrame.origin.y+30 + lFrame.size.height + PADDING, lWidth, lHeight);
+                                        lFrame.origin.y+30 + lFrame.size.height + PADDING+20, lWidth, lHeight);
             cancelButton.frame = lFrameD;
 			
             [cancelButton addTarget:self action:@selector(cancelAlertHud:) forControlEvents:UIControlEventTouchUpInside];

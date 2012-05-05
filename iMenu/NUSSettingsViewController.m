@@ -15,14 +15,13 @@
 - (UITextField *) passwordUITextFieldInit;
 - (UITextField *) confirmPwdUITextFieldInit;
 - (UITextField *) nameUITextFieldInit;
-- (UISegmentedControl *) genderUISegmentedControlInit;
 - (UITextField *) handphoneUITextFieldInit;
 
 @end
 
 @implementation NUSSettingsViewController
 
-@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, genderUILableView=_genderUILableView, genderUISegmentedControl=_genderUISegmentedControl, handphoneUITextField=_handphoneUITextField;
+@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField;
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,8 +49,6 @@
     [self setPasswordUITextField:nil];
     [self setConfirmPwdUITextField:nil];
     [self setNameUITextField:nil];
-    [self setGenderUILableView:nil];
-    [self setGenderUISegmentedControl:nil];
     [self setHandphoneUITextField:nil];
 }
 
@@ -95,9 +92,6 @@
                          
                          [self nameUITextFieldInit], nameViewKey,
                          
-                         @"Gender", genderLableKey,
-                         [self genderUISegmentedControlInit], genderViewKey,
-                         
                          [self handphoneUITextFieldInit], handphoneViewKey,
                          
                          nil],
@@ -119,7 +113,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 5;
 }
 
 // to determine specific row height for each cell, override this.
@@ -181,13 +175,6 @@
             break;
         }
         case 4:
-        {
-            cell.textLabel.text = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:genderLableKey]; 
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:genderViewKey];
-            [cell.contentView addSubview:control];
-            break;
-        }
-        case 5:
         {
             UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:handphoneViewKey];
             [cell.contentView addSubview:control];
@@ -255,22 +242,6 @@
     _nameUITextField.delegate = self;
     
     return _nameUITextField;
-}
-
-- (UISegmentedControl *) genderUISegmentedControlInit
-{
-    if (_genderUISegmentedControl == nil) 
-    {
-        NSArray *itemArray = [NSArray arrayWithObjects: @"Male", @"Female", nil];
-        _genderUISegmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
-        _genderUISegmentedControl.frame = CGRectMake(140, 16, 140, 40);
-        _genderUISegmentedControl.segmentedControlStyle = UISegmentedControlStylePlain;
-        _genderUISegmentedControl.selectedSegmentIndex = 0;
-        
-        [self.view addSubview:_genderUISegmentedControl];
-    }
-
-    return _genderUISegmentedControl;
 }
 
 - (UITextField *) handphoneUITextFieldInit

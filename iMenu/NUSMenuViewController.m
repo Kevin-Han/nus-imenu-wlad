@@ -157,7 +157,7 @@
     _loginHUD.labelText = @"Loging...";
 	_loginHUD.dimBackground = YES;
 	_loginHUD.square = YES;
-    _loginHUD.margin = 60.0;
+    _loginHUD.margin = 50.0;
     _loginHUD.delegate = self;
     _loginHUD.cancelButtonText = @"Cancel";
     
@@ -182,11 +182,11 @@
     NUSWebService *webserviceModel = [[NUSWebService alloc] init];
     NSString *loginResult = [webserviceModel getRespone:loginRequest];
 
-    
     NSString *result = [[NSString alloc] initWithFormat:@"%@", [webserviceModel getLoginResponse:loginResult]];
 
     //0=Password Fail,1=Success,-2=User ID not found.
-    if([@"1" isEqualToString:result])
+
+    if([result isEqualToString:@"1"])
         
     {
         NSLog(@"come to login success");
@@ -198,12 +198,15 @@
     else if([@"-2" isEqualToString:result])
     {
         [_loginHUD stopIndicators];
-        _loginHUD.labelText =  @"User ID not found";
+        _loginHUD.labelText =  @"Failed";
+        _loginHUD.detailsLabelText = @"User ID Not Found";
     }else{
         
         [_loginHUD stopIndicators];
-        _loginHUD.labelText =  @"password invalid";
-    
+        
+        _loginHUD.labelText =  @"Failed";
+        _loginHUD.detailsLabelText =  @"Password Invalid";
+
     }
     
     

@@ -16,8 +16,6 @@ static NSString *emailViewKey               = @"emailViewKey";
 static NSString *passwdViewKey              = @"passwdViewKey";
 static NSString *confirmPasswdViewKey       = @"confirmPasswdViewKey";
 static NSString *nameViewKey                = @"nameViewKey";
-static NSString *genderLableKey             = @"genderLableKey";
-static NSString *genderViewKey              = @"genderViewKey";
 static NSString *handphoneViewKey           = @"handphoneViewKey";
 
 
@@ -31,8 +29,6 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 @property (nonatomic, retain) UITextField           *passwordUITextField;
 @property (nonatomic, retain) UITextField           *confirmPwdUITextField;
 @property (nonatomic, retain) UITextField           *nameUITextField;
-@property (nonatomic, retain) UILabel               *genderUILableView;
-@property (nonatomic, retain) UISegmentedControl    *genderUISegmentedControl;
 @property (nonatomic, retain) UITextField           *handphoneUITextField;
 
 @property CGPoint centerPoint;
