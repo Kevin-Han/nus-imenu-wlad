@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NUSWebService.h"
+#import "SBJson.h"
 
 #define kViewTag 1	
 

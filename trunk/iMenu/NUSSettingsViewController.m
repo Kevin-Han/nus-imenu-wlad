@@ -304,9 +304,161 @@
 }
 - (IBAction)signUp:(id)sender 
 {
-    UIAlertView *signUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign Up" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    if([self validateContactSignUp]){
+    
+    UIAlertView *signUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign Up" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"SignUp", nil];
     
     [signUpAlert show];
+    }
 }
+
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"SignUp"])
+    {
+        NSLog(@"%s", __FUNCTION__);
+        [self contactSignUp];
+    }
+    
+}
+
+
+
+
+- (BOOL) validateEmail: (NSString *) emailVal {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:emailVal];
+}
+
+-(BOOL) validateContactSignUp{
+    
+    NSMutableString* printErrorMsg = [NSMutableString stringWithCapacity:15];
+    BOOL isProceed = TRUE;
+    
+    if([[_nameUITextField text] length]==0){
+        
+        [printErrorMsg appendString:@"please fill in Name;"];
+        isProceed = FALSE;
+    }  
+    
+    if([[_emailUITextField text] length]==0)
+    {
+        [printErrorMsg appendString:@"please fill in Email;"];
+        isProceed = FALSE;
+    }else if([self validateEmail:[_emailUITextField text]]==0)
+    {
+        [printErrorMsg appendString:@"email format incorrect;"];
+        isProceed = FALSE;
+    }
+    
+    if([[_handphoneUITextField text]length]==0)
+    {
+        [printErrorMsg appendString:@"please fill in Handphone;"];
+        isProceed = FALSE;
+    }
+    
+    if([[_passwordUITextField text] length]==0)
+    {
+        [printErrorMsg appendString:@"please fill in password;"];
+        isProceed = FALSE;
+    }
+    
+    if([[_confirmPwdUITextField text] length]==0)
+    {
+        [printErrorMsg appendString:@"please fill in confirm password;"];
+        isProceed = FALSE;
+    }else if(![[_passwordUITextField text] isEqualToString:[_confirmPwdUITextField text]]){
+        [printErrorMsg appendString:@"the confirm password is not tally with password;"];
+        isProceed = FALSE;
+    }
+    
+    // 
+    if(!isProceed){
+        UIAlertView *alertPopMsg = [[UIAlertView alloc]
+                                    initWithTitle:@"Alert" message:printErrorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertPopMsg show];
+        
+        return FALSE;
+        
+    
+    }else {
+        return TRUE;
+    }
+
+
+
+
+}
+
+-(bool) contactSignUp{
+    
+    NSString *contactSignUpRequest = 
+                    @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Registeration?";
+    
+    NSLog(@"aUserName %@",[_nameUITextField text]);
+    NSLog(@"aEmail %@",[_emailUITextField text]);
+    NSLog(@"aMobilePh%@",[_handphoneUITextField text]);
+    NSLog(@"aPassword%@",[_passwordUITextField text]);
+    
+    contactSignUpRequest = [contactSignUpRequest 
+                            stringByAppendingFormat:@"aUserName=%@",[_nameUITextField text]];
+    contactSignUpRequest = [contactSignUpRequest 
+                            stringByAppendingFormat:@"&aEmail=%@",[_emailUITextField text]];
+    contactSignUpRequest = [contactSignUpRequest 
+                            stringByAppendingFormat:@"&aMobilePh=%@",[_handphoneUITextField text]];
+    contactSignUpRequest = [contactSignUpRequest 
+                            stringByAppendingFormat:@"&aPassword=%@",[_passwordUITextField text]];
+    
+    
+    
+    NUSWebService *webserviceModel = [[NUSWebService alloc] init];
+    NSString *contactSignUpResult = [webserviceModel getRespone:contactSignUpRequest];
+    
+    if(contactSignUpResult==nil){
+        // pop message , the response is null
+        return FALSE;
+    }
+    
+    NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
+                        [webserviceModel getUserSignUpResponse:contactSignUpResult]];
+    
+
+    if(jsonDic==NULL){
+        
+        // pop message , json is not parse sucessfully
+        
+        return FALSE;
+    
+    }
+    
+    NSString *result = [jsonDic objectForKey:@"result"];
+    NSLog(@"dicUserInfo %@",result);
+    
+    if([@"1" isEqualToString:result])
+    {
+        return TRUE;
+    }
+    else if([@"0" isEqualToString:result])
+    {
+        ////Reason
+        NSString *reason = [jsonDic objectForKey:@"Reason"];
+        // pop message the reasons    
+        return FALSE;
+    }else{
+        return FALSE;
+        
+    }
+
+}
+
+
+
 @end
 

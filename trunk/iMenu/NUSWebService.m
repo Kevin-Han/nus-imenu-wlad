@@ -41,6 +41,48 @@
 
 
 
+-(NSMutableDictionary *)getUserSignUpResponse:(NSString *) webServiceResponse{
+    //http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Registeration?aUserName=1&aEmail=patty2@gmail.com&aMobilePh=1&aPassword=1
+
+    NSRange start = [webServiceResponse rangeOfString:@"WS\">"];
+    NSRange end = [webServiceResponse rangeOfString:@"</string>"];
+    
+    webServiceResponse = [webServiceResponse substringWithRange: 
+                          NSMakeRange (start.location+4, end.location-(start.location+4))];
+    
+    NSLog(@"webServiceResponse %@",webServiceResponse);
+    /*
+     // for testing 
+     webServiceResponse = [@"{\"result\":" stringByAppendingFormat:webServiceResponse];
+     webServiceResponse = [webServiceResponse stringByAppendingFormat:@"}"];
+     NSLog(@"webServiceResponse:%@",webServiceResponse);*/
+    // for testing 
+    
+    SBJsonParser *parser = [[SBJsonParser alloc] init];  
+    NSError *error = nil;  
+    NSMutableDictionary *jsonDic = [parser objectWithString:webServiceResponse error:&error]; 
+    if(error){
+        return NULL;
+    }
+    /*
+    
+    NSString *dicUserInfo = [jsonDic objectForKey:@"result"];
+    NSLog(@"dicUserInfo %@",dicUserInfo);
+    //Reason
+    NSString *reason = [jsonDic objectForKey:@"Reason"];
+    if (reason) {
+        reason = [dicUserInfo stringByAppendingFormat:@",%@",reason];
+    }
+    //dicUserInfo =[NSString stringWithFormat:@"%@",dicUserInfo];
+    return dicUserInfo;
+     */
+    return jsonDic;
+
+}
+
+
+
+
 -(NSMutableArray *)getStoreResponse:(NSString *) webServiceResponse{
     
     
@@ -112,9 +154,13 @@
     // for testing 
     //webServiceRequest = @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Login?email=zawmyotun82@googlemail.com&password=123456";
     webServiceRequest = [webServiceRequest stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@" webServiceRequest:%@",webServiceRequest );
 
     NSURL *RequestURL=[NSURL URLWithString:[NSString 
                                             stringWithFormat:@"%@",webServiceRequest]];
+    
+    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
     [request setURL:RequestURL];
@@ -133,7 +179,7 @@
     
      // here is for the login test
         
-    //NSLog(@" getRespone method result:%@",result );
+    NSLog(@" getRespone method result:%@",result );
     
     return result;
 

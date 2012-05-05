@@ -248,7 +248,6 @@
 		56EC44B81544334A0060D664 = {
 			isa = PBXGroup;
 			children = (
-				5CA112E71555173F001B0C8D /* MessageUI.framework */,
 				56EC44CD1544334A0060D664 /* Class */,
 				56EC44CE1544334A0060D664 /* Supporting Files */,
 				DDEA291815463DDC00C0B219 /* Resource */,
@@ -270,6 +269,7 @@
 		56EC44C61544334A0060D664 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CA112E71555173F001B0C8D /* MessageUI.framework */,
 				4B9839CD15541D4300FB79EC /* AddressBook.framework */,
 				4B9839CE15541D4300FB79EC /* AddressBookUI.framework */,
 				263B19C5154C4A290033798E /* MapKit.framework */,
