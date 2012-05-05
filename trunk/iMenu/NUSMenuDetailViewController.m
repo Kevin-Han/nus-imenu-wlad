@@ -57,7 +57,8 @@
 
 - (void)shareToFriends
 {
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s Calories=%@", __FUNCTION__, [_dataItem objectForKey:@"Calories"]);
+    
 }
 
 @end
