@@ -15,5 +15,7 @@
 
 -(NSString *)getLoginResponse:(NSString *) webServiceResponse;
 
+-(NSMutableDictionary *)getUserSignUpResponse:(NSString *) webServiceResponse;
+
 -(NSMutableArray *) getStoreResponse:(NSString *) webServiceResponse;
 @end
