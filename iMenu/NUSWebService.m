@@ -31,7 +31,9 @@
     SBJsonParser * parser = [[SBJsonParser alloc] init];  
     NSError * error = nil;  
     NSMutableDictionary *jsonDic = [parser objectWithString:webServiceResponse error:&error];  
-    NSString * dicUserInfo = [jsonDic objectForKey:@"result"];  
+    NSString * dicUserInfo = [jsonDic objectForKey:@"result"];
+    NSLog(@"dicUserInfo %@",dicUserInfo);
+    //dicUserInfo =[NSString stringWithFormat:@"%@",dicUserInfo];
     return dicUserInfo;
 
 }
