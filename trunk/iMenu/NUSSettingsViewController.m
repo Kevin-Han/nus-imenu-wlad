@@ -198,6 +198,7 @@
     _emailUITextField.placeholder = @"Email";
     _emailUITextField.keyboardType = UIKeyboardTypeEmailAddress; 
     _emailUITextField.returnKeyType = UIReturnKeyDone;
+    _emailUITextField.tag = 1;
     _emailUITextField.delegate = self;
     
     return _emailUITextField;
@@ -212,6 +213,7 @@
     _passwordUITextField.placeholder = @"Password";
     _passwordUITextField.secureTextEntry = YES;
     _passwordUITextField.returnKeyType = UIReturnKeyDone;
+    _passwordUITextField.tag = 2;
     _passwordUITextField.delegate = self;
     
     return _passwordUITextField;
@@ -226,6 +228,7 @@
     _confirmPwdUITextField.placeholder = @"Confirm Password";
     _confirmPwdUITextField.secureTextEntry = YES;
     _confirmPwdUITextField.returnKeyType = UIReturnKeyDone;
+    _confirmPwdUITextField.tag = 3;
     _confirmPwdUITextField.delegate = self;
     
     return _confirmPwdUITextField;
@@ -239,6 +242,7 @@
     _nameUITextField.font = [UIFont fontWithName:@"System" size:30];
     _nameUITextField.placeholder = @"Name";
     _nameUITextField.returnKeyType = UIReturnKeyDone;
+    _nameUITextField.tag = 4;
     _nameUITextField.delegate = self;
     
     return _nameUITextField;
@@ -253,7 +257,7 @@
     _handphoneUITextField.placeholder = @"Handphone";
     _handphoneUITextField.returnKeyType = UIReturnKeyDone;
     _handphoneUITextField.delegate = self;
-    _handphoneUITextField.keyboardType = UIKeyboardTypeNumberPad;
+    _handphoneUITextField.tag = 5;
     
     return _handphoneUITextField;
 }
@@ -262,21 +266,34 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField  
 {  
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s tag=%d", __FUNCTION__, textField.tag);
     
-    if (textField == _confirmPwdUITextField || textField == _nameUITextField || _handphoneUITextField)
+    if(textField.tag==3)
     {
         _centerPoint.y = self.view.center.y;
         
-        self.view.center=CGPointMake(self.view.center.x,40);
+        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-60);
     }
+    else if(textField.tag==4)
+    {
+        _centerPoint.y = self.view.center.y;
+        
+        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-120);
+    }
+    else if(textField.tag==5)
+    {
+        _centerPoint.y = self.view.center.y;
+        
+        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-160);
+    }
+
 }  
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;  
 {  
     NSLog(@"%s", __FUNCTION__);
     
-    if (textField == _confirmPwdUITextField || textField == _nameUITextField || _handphoneUITextField)
+    if(textField.tag==3 || textField.tag==4 || textField.tag==5)
     {
         self.view.center=CGPointMake(self.view.center.x, _centerPoint.y);
     }
