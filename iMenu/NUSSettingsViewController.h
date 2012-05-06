@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NUSWebService.h"
 #import "SBJson.h"
+#import "MBProgressHUD.h"
 
 #define kViewTag 1	
 
@@ -21,7 +22,7 @@ static NSString *nameViewKey                = @"nameViewKey";
 static NSString *handphoneViewKey           = @"handphoneViewKey";
 
 
-@interface NUSSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface NUSSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MBProgressHUDDelegate>
 
 - (IBAction)signUp:(id)sender;
 
@@ -32,6 +33,9 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 @property (nonatomic, retain) UITextField           *confirmPwdUITextField;
 @property (nonatomic, retain) UITextField           *nameUITextField;
 @property (nonatomic, retain) UITextField           *handphoneUITextField;
+@property (nonatomic, retain) MBProgressHUD         *signUpHUD;
+
+@property (nonatomic)         BOOL                  flagCancelSignUp;
 
 @property CGPoint centerPoint;
 
