@@ -142,9 +142,145 @@
     else if ([title isEqualToString:@"Order"])
     {
         NSLog(@"%s title=%@", __FUNCTION__, title);
+        [self submitOrderToWebService];
+        
          
     }
 }
+
+-(BOOL) submitOrderToWebService{
+        
+        NSString *orderRequest = 
+        @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/SubmitOrder?";
+        NSString *detailsJson=@"[";
+        
+      //  NSLog(@"order list lenth%@",[orderList count]);
+        BOOL isFirstItem = TRUE;
+        for (int i =0 ; i<6; i++) {
+            NSMutableDictionary *dataItem = [orderList objectAtIndex:i];
+            int count = (int)[dataItem valueForKey:@"Count"];
+            if (count!=0) 
+            {
+                if (isFirstItem) {
+                    isFirstItem = FALSE;
+                }else {
+                    detailsJson = [detailsJson stringByAppendingFormat:@","];
+                }
+                detailsJson  = [detailsJson stringByAppendingFormat:@"{\"ItemID\":\"%@\",\"Qty\":%@,\"Price\":10,\"DiscountAmt\":1}", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
+                NSLog(@"%s Name=%@ Count=%@", __FUNCTION__, [dataItem valueForKey:@"Name"], [dataItem valueForKey:@"Count"]);
+            }
+    
+        }
+        detailsJson = [detailsJson stringByAppendingFormat:@"]"];
+        NSLog(@"detailsJson%@",detailsJson);
+        
+    
+    
+    
+       
+        orderRequest = [orderRequest 
+                                stringByAppendingFormat:@"email=%@",_username];
+        orderRequest = [orderRequest 
+                                stringByAppendingFormat:@"&storeid=%@",@"1"];
+        orderRequest = [orderRequest 
+                                stringByAppendingFormat:@"&isdelivery=true&status=%@",@"3"];
+        orderRequest = [orderRequest 
+                                stringByAppendingFormat:@"&deliverydate=%@",@"2012-05-06"];
+        orderRequest = [orderRequest 
+                                stringByAppendingFormat:@"&detailsJson=%@",detailsJson];
+    
+        NSLog(@"%@",orderRequest);
+    
+        
+    
+        NUSWebService *webserviceModel = [[NUSWebService alloc] init];
+        NSString *orderSubmitResult = [webserviceModel getRespone:orderRequest];
+        
+        if(orderSubmitResult==nil){
+            // pop message , the response is null
+            return FALSE;
+        }
+        
+        //NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
+        // [webserviceModel getOrderResponse:contactSignUpResult]];
+        
+        
+        NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getOrderResponse:orderSubmitResult]];   
+        
+        //if(jsonDic==NULL){
+            // pop message , json is not parse sucessfully
+           // return FALSE;
+            
+       // }
+        
+        NSString *result = [jsonDic objectForKey:@"result"];
+        result =[NSString stringWithFormat:@"%@",result];
+        if([@"1" isEqualToString:result])
+        {
+            NSString *orderNo = [jsonDic objectForKey:@"OrderNo"];
+            orderNo = [orderNo stringByAppendingFormat:@"order submit success"];
+            NSLog(@"orderNO:%@",orderNo);
+            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:orderNo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+            [alertsuccessMsg show];
+            return TRUE;
+        }
+        else if([@"0" isEqualToString:result])
+        {
+            //Reason
+            NSString *reason = [jsonDic objectForKey:@"Reason"];
+            // NSLog(@"reason %@",reason);
+            // pop message the reasons
+        
+            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertsuccessMsg show];
+        
+            return FALSE;
+        }else{
+            return FALSE;
+            
+        }
+
+    
+    /*
+        if([@"1" isEqualToString:result])
+        {
+            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                            initWithTitle:@"Alert" message:@"order submit success" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [alertsuccessMsg show];
+            return TRUE;
+        }
+        else if([@"0" isEqualToString:result])
+        {
+            
+            
+            //Reason
+            NSString *reason = [jsonDic objectForKey:@"Reason"];
+            // NSLog(@"reason %@",reason);
+            // pop message the reasons
+            
+            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                            initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertsuccessMsg show];
+            
+            return FALSE;
+        }else{
+            return FALSE;
+            
+        }
+     
+     */
+        
+
+   // return true;
+
+}
+
+
+
 
 
 #pragma mark - Show login view

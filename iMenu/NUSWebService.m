@@ -61,10 +61,10 @@
     SBJsonParser *parser = [[SBJsonParser alloc] init];  
     NSError *error = nil;  
     NSMutableDictionary *jsonDic = [parser objectWithString:webServiceResponse error:&error]; 
-    if(error){
+    /*if(error){
         return NULL;
     }
-    /*
+    
     
     NSString *dicUserInfo = [jsonDic objectForKey:@"result"];
     NSLog(@"dicUserInfo %@",dicUserInfo);
@@ -182,6 +182,28 @@
     NSLog(@" getRespone method result:%@",result );
     
     return result;
+
+}
+
+
+-(NSMutableDictionary *)getOrderResponse:(NSString *) webServiceResponse{
+    //http://aspspider.info/zmtun/MobileRestaurantWS.asmx/SubmitOrder?email=zawmyotun82@googlemail.com&storeid=1&isdelivery=true&status=3&deliverydate=2012-05-06&detailsJson=[{"ItemID":"A00001","Qty":1,"Price":10,"DiscountAmt":1}]
+    NSRange start = [webServiceResponse rangeOfString:@"WS\">"];
+    NSRange end = [webServiceResponse rangeOfString:@"</string>"];
+    
+    webServiceResponse = [webServiceResponse substringWithRange: 
+                          NSMakeRange (start.location+4, end.location-(start.location+4))];
+    
+    NSLog(@"webServiceResponse %@",webServiceResponse);
+   
+    
+    SBJsonParser *parser = [[SBJsonParser alloc] init];  
+    NSError *error = nil;  
+    NSMutableDictionary *jsonDic = [parser objectWithString:webServiceResponse error:&error]; 
+    /*if(error){
+     return NULL;
+    }*/
+    return jsonDic;
 
 }
 

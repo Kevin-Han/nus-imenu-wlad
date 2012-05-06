@@ -17,5 +17,6 @@
 
 -(NSMutableDictionary *)getUserSignUpResponse:(NSString *) webServiceResponse;
 
+-(NSMutableDictionary *)getOrderResponse:(NSString *) webServiceResponse;
 -(NSMutableArray *) getStoreResponse:(NSString *) webServiceResponse;
 @end

@@ -13,6 +13,7 @@
 #import "NUSMenuDetailViewController.h"
 #import "NUSWebService.h"
 #import "NUSAppDelegate.h"
+#import "SBJson.h"
 
 @interface NUSMenuViewController : UIViewController <MBProgressHUDDelegate>
 
