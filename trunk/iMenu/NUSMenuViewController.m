@@ -148,7 +148,7 @@
     }
 }
 
--(BOOL) submitOrderToWebService{
+-(void) submitOrderToWebService{
         
         NSString *orderRequest = 
         @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/SubmitOrder?";
@@ -166,24 +166,25 @@
                 }else {
                     detailsJson = [detailsJson stringByAppendingFormat:@","];
                 }
-                detailsJson  = [detailsJson stringByAppendingFormat:@"{\"ItemID\":\"%@\",\"Qty\":%@,\"Price\":10,\"DiscountAmt\":1}", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
+                // discount is default set to 0
+                // the price value if not set, then the web service side will get it from database
+                detailsJson  = [detailsJson stringByAppendingFormat:@"{\"ItemID\":\"%@\",\"Qty\":%@,\"Price\":0,\"DiscountAmt\":0}", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
                 NSLog(@"%s Name=%@ Count=%@", __FUNCTION__, [dataItem valueForKey:@"Name"], [dataItem valueForKey:@"Count"]);
             }
     
         }
         detailsJson = [detailsJson stringByAppendingFormat:@"]"];
         NSLog(@"detailsJson%@",detailsJson);
-        
-    
-    
-    
        
         orderRequest = [orderRequest 
                                 stringByAppendingFormat:@"email=%@",_username];
+    // have to set the store id
         orderRequest = [orderRequest 
                                 stringByAppendingFormat:@"&storeid=%@",@"1"];
+    // these two value is fixed
         orderRequest = [orderRequest 
                                 stringByAppendingFormat:@"&isdelivery=true&status=%@",@"3"];
+    // this value should get from the input view
         orderRequest = [orderRequest 
                                 stringByAppendingFormat:@"&deliverydate=%@",@"2012-05-06"];
         orderRequest = [orderRequest 
@@ -198,7 +199,10 @@
         
         if(orderSubmitResult==nil){
             // pop message , the response is null
-            return FALSE;
+            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                            initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertsuccessMsg show];
+           
         }
         
         //NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
@@ -218,13 +222,12 @@
         if([@"1" isEqualToString:result])
         {
             NSString *orderNo = [jsonDic objectForKey:@"OrderNo"];
-            orderNo = [orderNo stringByAppendingFormat:@"order submit success"];
+            orderNo = [orderNo stringByAppendingFormat:@" order confirmation email send to your email."];
             NSLog(@"orderNO:%@",orderNo);
             UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
                                         initWithTitle:@"Alert" message:orderNo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
             [alertsuccessMsg show];
-            return TRUE;
         }
         else if([@"0" isEqualToString:result])
         {
@@ -237,45 +240,13 @@
                                         initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertsuccessMsg show];
         
-            return FALSE;
-        }else{
-            return FALSE;
-            
-        }
 
-    
-    /*
-        if([@"1" isEqualToString:result])
-        {
+        }else{
             UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                            initWithTitle:@"Alert" message:@"order submit success" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            
-            [alertsuccessMsg show];
-            return TRUE;
-        }
-        else if([@"0" isEqualToString:result])
-        {
-            
-            
-            //Reason
-            NSString *reason = [jsonDic objectForKey:@"Reason"];
-            // NSLog(@"reason %@",reason);
-            // pop message the reasons
-            
-            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                            initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                            initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertsuccessMsg show];
             
-            return FALSE;
-        }else{
-            return FALSE;
-            
         }
-     
-     */
-        
-
-   // return true;
 
 }
 
