@@ -23,7 +23,6 @@
 		4B98E3F81552C463004A36BC /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98E3EA1552C463004A36BC /* SBJsonTokeniser.m */; };
 		4B98E3F91552C463004A36BC /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98E3EC1552C463004A36BC /* SBJsonUTF8Stream.m */; };
 		4B98E3FA1552C463004A36BC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98E3EE1552C463004A36BC /* SBJsonWriter.m */; };
-		4B993F681552B6F9004242B6 /* NUSMapAddresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B993F671552B6F8004242B6 /* NUSMapAddresses.m */; };
 		4BB3B7441551775600711743 /* NUSWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB3B7431551775600711743 /* NUSWebService.m */; };
 		56EC44C81544334A0060D664 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44C71544334A0060D664 /* UIKit.framework */; };
 		56EC44CA1544334A0060D664 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44C91544334A0060D664 /* Foundation.framework */; };
@@ -116,8 +115,6 @@
 		4B98E3EC1552C463004A36BC /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		4B98E3ED1552C463004A36BC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		4B98E3EE1552C463004A36BC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		4B993F661552B6F8004242B6 /* NUSMapAddresses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUSMapAddresses.h; sourceTree = "<group>"; };
-		4B993F671552B6F8004242B6 /* NUSMapAddresses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NUSMapAddresses.m; sourceTree = "<group>"; };
 		4BB3B7421551775600711743 /* NUSWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUSWebService.h; sourceTree = "<group>"; };
 		4BB3B7431551775600711743 /* NUSWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NUSWebService.m; sourceTree = "<group>"; };
 		56EC44C31544334A0060D664 /* iMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,8 +404,6 @@
 				8F9DC6F2154AC786005E1B71 /* MapAnnotation.m */,
 				DDFBCEDA1550D26400831067 /* NUSSettingsViewController.h */,
 				DDFBCEDB1550D26400831067 /* NUSSettingsViewController.m */,
-				4B993F661552B6F8004242B6 /* NUSMapAddresses.h */,
-				4B993F671552B6F8004242B6 /* NUSMapAddresses.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -559,7 +554,6 @@
 				DD856CCD154E2A2C0012DD77 /* NUSMenuDetailViewController.m in Sources */,
 				DDFBCEDC1550D26400831067 /* NUSSettingsViewController.m in Sources */,
 				4BB3B7441551775600711743 /* NUSWebService.m in Sources */,
-				4B993F681552B6F9004242B6 /* NUSMapAddresses.m in Sources */,
 				4B98E3EF1552C463004A36BC /* NSObject+SBJson.m in Sources */,
 				4B98E3F01552C463004A36BC /* SBJsonParser.m in Sources */,
 				4B98E3F11552C463004A36BC /* SBJsonStreamParser.m in Sources */,
