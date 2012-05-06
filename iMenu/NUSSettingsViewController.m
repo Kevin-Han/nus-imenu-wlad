@@ -380,14 +380,17 @@
         
         return FALSE;
         
-    
     }else {
         return TRUE;
     }
 }
 
+<<<<<<< .mine
+-(BOOL) contactSignUp{
+=======
 -(void) doContactSignUp
 {
+>>>>>>> .r11
     
     NSString *contactSignUpRequest = 
                     @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Registeration?";
@@ -420,10 +423,20 @@
         _signUpHUD.labelText =  @"Sign Up Failed";
     }
     
+<<<<<<< .mine
+    //NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
+                       // [webserviceModel getUserSignUpResponse:contactSignUpResult]];
+=======
    // NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", [webserviceModel getUserSignUpResponse:contactSignUpResult]];
+>>>>>>> .r11
     
+<<<<<<< .mine
+    
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getUserSignUpResponse:contactSignUpResult]];   
+=======
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getUserSignUpResponse:contactSignUpResult]];
     
+>>>>>>> .r11
 
     if(jsonDic==Nil)
     {
@@ -436,21 +449,45 @@
     }
     
     NSString *result = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"result"]];
-    
+    result =[NSString stringWithFormat:@"%@",result];
     NSLog(@"%s dicUserInfo %@",__FUNCTION__, result);
     
     if([@"1" isEqualToString:result])
     {
+<<<<<<< .mine
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:@"contact sign up success" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertsuccessMsg show];
+        return TRUE;
+=======
         NSLog(@"%s Sigu Up Success", __FUNCTION__);
         [_signUpHUD stopIndicators];
         _signUpHUD.labelText =  @"Succeed";
         _flagCancelSignUp=1;
+>>>>>>> .r11
     }
     else if([@"0" isEqualToString:result])
     {
-        ////Reason
+        
+        
+        //Reason
+<<<<<<< .mine
+        NSString *reason = [jsonDic objectForKey:@"Reason"];
+       // NSLog(@"reason %@",reason);
+        // pop message the reasons
+        
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertsuccessMsg show];
+        
+        return FALSE;
+    }else{
+        return FALSE;
+=======
         NSString *reason = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"Reason"]];
         // pop message the reasons 
+>>>>>>> .r11
         
         [_signUpHUD stopIndicators];
         _signUpHUD.labelText =  @"Sign Up Failed";
