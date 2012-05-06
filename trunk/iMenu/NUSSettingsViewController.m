@@ -21,7 +21,7 @@
 
 @implementation NUSSettingsViewController
 
-@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField;
+@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp;
 
 - (void)didReceiveMemoryWarning
 {
@@ -304,31 +304,24 @@
 }
 - (IBAction)signUp:(id)sender 
 {
-    if([self validateContactSignUp]){
-    
-    UIAlertView *signUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign Up" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"SignUp", nil];
-    
-    [signUpAlert show];
-    }
-}
-
-
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if([title isEqualToString:@"SignUp"])
+    if([self validateContactSignUp])
     {
-        NSLog(@"%s", __FUNCTION__);
-        [self contactSignUp];
+        _signUpHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        
+        _signUpHUD.labelText = @"Sign Up...";
+        _signUpHUD.dimBackground = YES;
+        _signUpHUD.square = YES;
+        _signUpHUD.margin = 60.0;
+        _signUpHUD.delegate = self;
+        _signUpHUD.cancelButtonText = @"Cancle";
+        
+        _flagCancelSignUp = 0;
+        
+        [self.view addSubview:_signUpHUD];
+        
+        [_signUpHUD showWhileExecuting:@selector(doContactSignUp) onTarget:self withObject:nil animated:YES];
     }
-    
 }
-
-
-
 
 - (BOOL) validateEmail: (NSString *) emailVal {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -343,38 +336,38 @@
     
     if([[_nameUITextField text] length]==0){
         
-        [printErrorMsg appendString:@"please fill in Name;"];
+        [printErrorMsg appendString:@"Please fill in Name!\n"];
         isProceed = FALSE;
     }  
     
     if([[_emailUITextField text] length]==0)
     {
-        [printErrorMsg appendString:@"please fill in Email;"];
+        [printErrorMsg appendString:@"Please fill in Email!\n"];
         isProceed = FALSE;
     }else if([self validateEmail:[_emailUITextField text]]==0)
     {
-        [printErrorMsg appendString:@"email format incorrect;"];
+        [printErrorMsg appendString:@"Email format incorrect!\n"];
         isProceed = FALSE;
     }
     
     if([[_handphoneUITextField text]length]==0)
     {
-        [printErrorMsg appendString:@"please fill in Handphone;"];
+        [printErrorMsg appendString:@"Please fill in Handphone!\n"];
         isProceed = FALSE;
     }
     
     if([[_passwordUITextField text] length]==0)
     {
-        [printErrorMsg appendString:@"please fill in password;"];
+        [printErrorMsg appendString:@"Please fill in password!\n"];
         isProceed = FALSE;
     }
     
     if([[_confirmPwdUITextField text] length]==0)
     {
-        [printErrorMsg appendString:@"please fill in confirm password;"];
+        [printErrorMsg appendString:@"Please fill in confirm password!\n"];
         isProceed = FALSE;
     }else if(![[_passwordUITextField text] isEqualToString:[_confirmPwdUITextField text]]){
-        [printErrorMsg appendString:@"the confirm password is not tally with password;"];
+        [printErrorMsg appendString:@"The confirm password is not tally with password!\n"];
         isProceed = FALSE;
     }
     
@@ -391,13 +384,10 @@
     }else {
         return TRUE;
     }
-
-
-
-
 }
 
--(bool) contactSignUp{
+-(void) doContactSignUp
+{
     
     NSString *contactSignUpRequest = 
                     @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Registeration?";
@@ -417,47 +407,90 @@
                             stringByAppendingFormat:@"&aPassword=%@",[_passwordUITextField text]];
     
     
-    
     NUSWebService *webserviceModel = [[NUSWebService alloc] init];
     NSString *contactSignUpResult = [webserviceModel getRespone:contactSignUpRequest];
     
-    if(contactSignUpResult==nil){
+    if(contactSignUpResult==nil)
+    {
         // pop message , the response is null
-        return FALSE;
+        
+        NSLog(@"%s contactSignUpResult==nil", __FUNCTION__);
+        
+        [_signUpHUD stopIndicators];
+        _signUpHUD.labelText =  @"Sign Up Failed";
     }
     
-    NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
-                        [webserviceModel getUserSignUpResponse:contactSignUpResult]];
+   // NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", [webserviceModel getUserSignUpResponse:contactSignUpResult]];
+    
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getUserSignUpResponse:contactSignUpResult]];
     
 
-    if(jsonDic==NULL){
-        
+    if(jsonDic==Nil)
+    {
         // pop message , json is not parse sucessfully
         
-        return FALSE;
-    
+        NSLog(@"%s jsonDic==nil", __FUNCTION__);
+        
+        [_signUpHUD stopIndicators];
+        _signUpHUD.labelText =  @"Sign Up Failed";
     }
     
-    NSString *result = [jsonDic objectForKey:@"result"];
-    NSLog(@"dicUserInfo %@",result);
+    NSString *result = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"result"]];
+    
+    NSLog(@"%s dicUserInfo %@",__FUNCTION__, result);
     
     if([@"1" isEqualToString:result])
     {
-        return TRUE;
+        NSLog(@"%s Sigu Up Success", __FUNCTION__);
+        [_signUpHUD stopIndicators];
+        _signUpHUD.labelText =  @"Succeed";
+        _flagCancelSignUp=1;
     }
     else if([@"0" isEqualToString:result])
     {
         ////Reason
-        NSString *reason = [jsonDic objectForKey:@"Reason"];
-        // pop message the reasons    
-        return FALSE;
-    }else{
-        return FALSE;
+        NSString *reason = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"Reason"]];
+        // pop message the reasons 
         
+        [_signUpHUD stopIndicators];
+        _signUpHUD.labelText =  @"Sign Up Failed";
+        _signUpHUD.detailsLabelText = reason;
+    }
+    else
+    {
+        [_signUpHUD stopIndicators];
+        _signUpHUD.labelText =  @"Sign Up Failed";
+    }
+    
+    
+    while(!_flagCancelSignUp)
+    { 
+        sleep(1);
     }
 
 }
 
+#pragma mark - MBProgressHUD delegate
+
+- (void)hudWasHidden 
+{  
+    if(_signUpHUD)
+    {
+        // Remove HUD from screen when the HUD was hidded  
+        [_signUpHUD removeFromSuperview];  
+    }
+}  
+
+- (void)clearHud
+{
+    if(_signUpHUD)
+    {
+        // Remove HUD from screen when the HUD was hidded  
+        [_signUpHUD removeFromSuperview];  
+        
+        _flagCancelSignUp = 1;
+    }
+}
 
 
 @end
