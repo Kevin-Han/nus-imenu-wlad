@@ -7,6 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "NUSWebService.h"
 
 @interface iMenuTests : SenTestCase
 
