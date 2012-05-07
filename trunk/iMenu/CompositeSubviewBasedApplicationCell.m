@@ -81,7 +81,7 @@
         if( _cell.stepperValue==nil)
         {
             _cell.stepperValue=[[UILabel alloc] initWithFrame:CGRectMake(260, 20, 60, 60)];
-            _cell.stepperValue.text = [NSString stringWithFormat:@"%d", (int)_cell.stepper.value];
+            _cell.stepperValue.text = [[NSString alloc] initWithFormat:@"0"];
             _cell.stepperValue.font = [UIFont boldSystemFontOfSize:48.0];
             _cell.stepperValue.backgroundColor = [UIColor clearColor];
             _cell.stepperValue.textColor = [UIColor orangeColor];
@@ -94,8 +94,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSLog(@"%s", __FUNCTION__);
-    
     [_cell.icon drawAtPoint:CGPointMake(11.0, 5.0)];
 
     _highlighted ? [[UIColor whiteColor] set] : [[UIColor blackColor] set];
@@ -129,9 +127,10 @@
 {
     NSMutableDictionary *dataItem = [orderList objectAtIndex:_cell.stepper.tag];
     
+    NSLog(@"%s tag=%d", __FUNCTION__, _cell.stepper.tag);
     [dataItem setValue:[NSNumber numberWithDouble:_cell.stepper.value] forKey:@"Count"];
     
-    _cell.stepperValue.text = [NSString stringWithFormat:@"%@", [dataItem valueForKey:@"Count"]];
+    _cell.stepperValue.text = [[NSString alloc] initWithFormat:@"%@", [dataItem valueForKey:@"Count"]];
 }
 @end
 
