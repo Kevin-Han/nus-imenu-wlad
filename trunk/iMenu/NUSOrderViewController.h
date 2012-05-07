@@ -12,5 +12,8 @@
 
 @interface NUSOrderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,MBProgressHUDDelegate>
 
-@property (nonatomic, retain) NSMutableArray *dataSourceArray;
+@property (weak, nonatomic) IBOutlet UITableView *orderTableView;
+
+@property (nonatomic, retain) NSMutableArray *data;
+
 @end
