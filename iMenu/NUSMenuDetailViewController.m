@@ -74,7 +74,7 @@
 
 - (void)shareToFriends
 {
-    NSLog(@"%s Calories=%@", __FUNCTION__, [_dataItem objectForKey:@"Calories"]);
+    NSLog(@"%s", __FUNCTION__);
     
     
     if ([MFMailComposeViewController canSendMail])

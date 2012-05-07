@@ -394,7 +394,7 @@
 	// Configure the data for the cell.
     NSDictionary *dataItem = [_data objectAtIndex:indexPath.row];
     cell.icon = [UIImage imageNamed:[dataItem objectForKey:@"Icon"]];
-    cell.price = [dataItem objectForKey:@"Price"];
+    cell.price = [[NSString alloc] initWithFormat:@"S$%@", [dataItem objectForKey:@"Price"]];
     cell.name = [dataItem objectForKey:@"Name"];
     cell.numRatings = [[dataItem objectForKey:@"NumRatings"] intValue];
     cell.rating = [[dataItem objectForKey:@"Rating"] floatValue];
