@@ -207,9 +207,6 @@
            
         }
         
-        //NSMutableDictionary *jsonDic = [NSString stringWithFormat:@"%@", 
-        // [webserviceModel getOrderResponse:contactSignUpResult]];
-        
         
         NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getOrderResponse:orderSubmitResult]];   
         
