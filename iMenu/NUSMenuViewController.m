@@ -59,6 +59,7 @@
 
 #pragma mark - Action Methods
 
+#if 0
 - (IBAction)orderBarButtonAction:(id)sender 
 {
     if([[_loginBarButtonItem title] isEqualToString:@"Login"])
@@ -98,6 +99,7 @@
         }
     }
 }
+#endif
 
 - (IBAction)loginBarButtonAction:(id)sender
 {

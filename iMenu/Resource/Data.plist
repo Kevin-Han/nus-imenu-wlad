@@ -80,7 +80,7 @@ Amount Serving Size: 1           169 g</string>
 		<key>ID</key>
 		<string>A00003</string>
 		<key>Name</key>
-		<string>Milk Pudding   </string>
+		<string>Milk Pudding</string>
 		<key>NumRatings</key>
 		<integer>87</integer>
 		<key>Rating</key>
@@ -219,6 +219,8 @@ Amount Serving Size: 1           169 g</string>
 		<string>9.1 g</string>
 		<key>Total Fat</key>
 		<string>41.5 g</string>
+		<key>Total Carbohydrate</key>
+		<string>88.1 g</string>
 		<key>Amount Serving Size</key>
 		<string>333 g</string>
 	</dict>

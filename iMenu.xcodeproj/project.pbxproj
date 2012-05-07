@@ -30,11 +30,6 @@
 		56EC44D21544334A0060D664 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44D01544334A0060D664 /* InfoPlist.strings */; };
 		56EC44D41544334A0060D664 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 56EC44D31544334A0060D664 /* main.m */; };
 		56EC44D81544334A0060D664 /* NUSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56EC44D71544334A0060D664 /* NUSAppDelegate.m */; };
-		56EC44DB1544334A0060D664 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44D91544334A0060D664 /* MainStoryboard.storyboard */; };
-		56EC44E01544334A0060D664 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44DF1544334A0060D664 /* first.png */; };
-		56EC44E21544334A0060D664 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44E11544334A0060D664 /* first@2x.png */; };
-		56EC44E71544334A0060D664 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44E61544334A0060D664 /* second.png */; };
-		56EC44E91544334A0060D664 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56EC44E81544334A0060D664 /* second@2x.png */; };
 		56EC44F11544334A0060D664 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44F01544334A0060D664 /* SenTestingKit.framework */; };
 		56EC44F21544334A0060D664 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44C71544334A0060D664 /* UIKit.framework */; };
 		56EC44F31544334A0060D664 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EC44C91544334A0060D664 /* Foundation.framework */; };
@@ -54,6 +49,8 @@
 		DD6DF3BD154A90660077FBD2 /* LemonPie.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6DF3B7154A90660077FBD2 /* LemonPie.png */; };
 		DD6DF3BE154A90660077FBD2 /* MilkPudding.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6DF3B8154A90660077FBD2 /* MilkPudding.png */; };
 		DD856CCD154E2A2C0012DD77 /* NUSMenuDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD856CCC154E2A2C0012DD77 /* NUSMenuDetailViewController.m */; };
+		DD8616481557988300AF24EB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8616461557988300AF24EB /* MainStoryboard.storyboard */; };
+		DD86164B1557A71D00AF24EB /* NUSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86164A1557A71D00AF24EB /* NUSOrderViewController.m */; };
 		DD900D31154A301200BAECB2 /* ApplicationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD900D30154A301200BAECB2 /* ApplicationCell.m */; };
 		DD900D34154A301F00BAECB2 /* CompositeSubviewBasedApplicationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD900D33154A301F00BAECB2 /* CompositeSubviewBasedApplicationCell.m */; };
 		DD900D36154A424E00BAECB2 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD900D35154A424E00BAECB2 /* Data.plist */; };
@@ -127,11 +124,6 @@
 		56EC44D51544334A0060D664 /* iMenu-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMenu-Prefix.pch"; sourceTree = "<group>"; };
 		56EC44D61544334A0060D664 /* NUSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NUSAppDelegate.h; sourceTree = "<group>"; };
 		56EC44D71544334A0060D664 /* NUSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NUSAppDelegate.m; sourceTree = "<group>"; };
-		56EC44DA1544334A0060D664 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		56EC44DF1544334A0060D664 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = first.png; path = ../first.png; sourceTree = "<group>"; };
-		56EC44E11544334A0060D664 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "first@2x.png"; path = "../first@2x.png"; sourceTree = "<group>"; };
-		56EC44E61544334A0060D664 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = second.png; path = ../second.png; sourceTree = "<group>"; };
-		56EC44E81544334A0060D664 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "second@2x.png"; path = "../second@2x.png"; sourceTree = "<group>"; };
 		56EC44EF1544334A0060D664 /* iMenuTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMenuTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56EC44F01544334A0060D664 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		56EC44F81544334A0060D664 /* iMenuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iMenuTests-Info.plist"; sourceTree = "<group>"; };
@@ -157,6 +149,9 @@
 		DD6DF3B8154A90660077FBD2 /* MilkPudding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MilkPudding.png; sourceTree = "<group>"; };
 		DD856CCB154E2A2C0012DD77 /* NUSMenuDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUSMenuDetailViewController.h; sourceTree = "<group>"; };
 		DD856CCC154E2A2C0012DD77 /* NUSMenuDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NUSMenuDetailViewController.m; sourceTree = "<group>"; };
+		DD8616471557988300AF24EB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		DD8616491557A71D00AF24EB /* NUSOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NUSOrderViewController.h; sourceTree = "<group>"; };
+		DD86164A1557A71D00AF24EB /* NUSOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NUSOrderViewController.m; sourceTree = "<group>"; };
 		DD900D2F154A301200BAECB2 /* ApplicationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationCell.h; sourceTree = "<group>"; };
 		DD900D30154A301200BAECB2 /* ApplicationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationCell.m; sourceTree = "<group>"; };
 		DD900D32154A301F00BAECB2 /* CompositeSubviewBasedApplicationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeSubviewBasedApplicationCell.h; sourceTree = "<group>"; };
@@ -294,7 +289,7 @@
 		56EC44CE1544334A0060D664 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				56EC44D91544334A0060D664 /* MainStoryboard.storyboard */,
+				DD8616461557988300AF24EB /* MainStoryboard.storyboard */,
 				56EC44CF1544334A0060D664 /* iMenu-Info.plist */,
 				56EC44D01544334A0060D664 /* InfoPlist.strings */,
 				56EC44D31544334A0060D664 /* main.m */,
@@ -374,10 +369,6 @@
 				DD900D3F154A58FD00BAECB2 /* StarsBackground.png */,
 				DD900D40154A58FD00BAECB2 /* StarsForeground.png */,
 				DD900D35154A424E00BAECB2 /* Data.plist */,
-				56EC44DF1544334A0060D664 /* first.png */,
-				56EC44E11544334A0060D664 /* first@2x.png */,
-				56EC44E61544334A0060D664 /* second.png */,
-				56EC44E81544334A0060D664 /* second@2x.png */,
 				DDEA291915463DDC00C0B219 /* Icon-small.png */,
 				DDEA291A15463DDC00C0B219 /* Icon-small@2x.png */,
 				DDEA291B15463DDC00C0B219 /* Icon.png */,
@@ -404,6 +395,8 @@
 				8F9DC6F2154AC786005E1B71 /* MapAnnotation.m */,
 				DDFBCEDA1550D26400831067 /* NUSSettingsViewController.h */,
 				DDFBCEDB1550D26400831067 /* NUSSettingsViewController.m */,
+				DD8616491557A71D00AF24EB /* NUSOrderViewController.h */,
+				DD86164A1557A71D00AF24EB /* NUSOrderViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -480,11 +473,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				56EC44D21544334A0060D664 /* InfoPlist.strings in Resources */,
-				56EC44DB1544334A0060D664 /* MainStoryboard.storyboard in Resources */,
-				56EC44E01544334A0060D664 /* first.png in Resources */,
-				56EC44E21544334A0060D664 /* first@2x.png in Resources */,
-				56EC44E71544334A0060D664 /* second.png in Resources */,
-				56EC44E91544334A0060D664 /* second@2x.png in Resources */,
 				DDEA291D15463DDC00C0B219 /* Icon-small.png in Resources */,
 				DDEA291E15463DDC00C0B219 /* Icon-small@2x.png in Resources */,
 				DDEA291F15463DDC00C0B219 /* Icon.png in Resources */,
@@ -509,6 +497,7 @@
 				DDF6F7FC15513D0D00E7AE33 /* MilkPudding2x.png in Resources */,
 				DD3822491553DFEA00B35E26 /* map.png in Resources */,
 				DD38224A1553DFEA00B35E26 /* menu.png in Resources */,
+				DD8616481557988300AF24EB /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +555,7 @@
 				4B98E3F81552C463004A36BC /* SBJsonTokeniser.m in Sources */,
 				4B98E3F91552C463004A36BC /* SBJsonUTF8Stream.m in Sources */,
 				4B98E3FA1552C463004A36BC /* SBJsonWriter.m in Sources */,
+				DD86164B1557A71D00AF24EB /* NUSOrderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,20 +586,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		56EC44D91544334A0060D664 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				56EC44DA1544334A0060D664 /* en */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		56EC44F91544334A0060D664 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				56EC44FA1544334A0060D664 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DD8616461557988300AF24EB /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD8616471557988300AF24EB /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

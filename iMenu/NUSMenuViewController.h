@@ -25,7 +25,7 @@
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginBarButtonItem;
 
-- (IBAction)orderBarButtonAction:(id)sender;
+//- (IBAction)orderBarButtonAction:(id)sender;
 
 - (IBAction)loginBarButtonAction:(id)sender;
 

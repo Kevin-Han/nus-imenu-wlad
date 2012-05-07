@@ -37,6 +37,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Order" id="K0P-dz-EGY">
                             <connections>
                                 <action selector="orderBarButtonAction:" destination="2" id="xiI-Ec-nRZ"/>
+                                <segue destination="zTt-17-Tdv" kind="push" id="lWd-4t-Vrb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -48,6 +49,32 @@
             </objects>
             <point key="canvasLocation" x="681" y="-120"/>
         </scene>
+        <!--Order View Controller - Order-->
+        <scene sceneID="h5G-yX-SRP">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Etf-Hi-ELr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="zTt-17-Tdv" customClass="NUSOrderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pqg-NE-gK1">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FgF-rO-EWO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zTt-17-Tdv" id="f7W-23-pro"/>
+                                    <outlet property="delegate" destination="zTt-17-Tdv" id="dnX-wT-aGk"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Order" id="AY2-Da-l23"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1050" y="-740"/>
+        </scene>
         <!--Menu Detail View Controller-->
         <scene sceneID="9Ec-d3-Rcb">
             <objects>
@@ -58,13 +85,90 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="2Na-7g-ygc">
-                                <rect key="frame" x="30" y="44" width="260" height="160"/>
+                                <rect key="frame" x="30" y="50" width="260" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomLeft" text="Food Detail " lineBreakMode="headTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" minimumFontSize="8" id="3TR-AP-1cJ">
-                                <rect key="frame" x="20" y="165" width="280" height="177"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Rmw-EB-dTc">
+                                <rect key="frame" x="220" y="170" width="42" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="HWd-wn-yZO">
+                                <rect key="frame" x="220" y="205" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xga-ik-zOV">
+                                <rect key="frame" x="220" y="240" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="itp-xm-dHQ">
+                                <rect key="frame" x="220" y="275" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Wxc-hc-iCv">
+                                <rect key="frame" x="220" y="310" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Jzt-GQ-7e5">
+                                <rect key="frame" x="220" y="345" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Calories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Jvk-2T-7HC">
+                                <rect key="frame" x="50" y="170" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dietary Fiber" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W5f-ii-5fF">
+                                <rect key="frame" x="50" y="205" width="120" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sugars" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Xtb-eW-Idl">
+                                <rect key="frame" x="50" y="240" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Fat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="CVH-96-zgU">
+                                <rect key="frame" x="50" y="275" width="84" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Total Carbohydrate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="crz-oC-LVD">
+                                <rect key="frame" x="50" y="310" width="199" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Amount Serving Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5RF-Ki-5GZ">
+                                <rect key="frame" x="50" y="345" width="159" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -73,8 +177,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="EbA-qm-EWH"/>
                     <connections>
-                        <outlet property="detailUILable" destination="3TR-AP-1cJ" id="sDZ-DZ-7gr"/>
+                        <outlet property="amountServingSizeLable" destination="Jzt-GQ-7e5" id="wUV-eH-sgG"/>
+                        <outlet property="caloriesLable" destination="Rmw-EB-dTc" id="TwM-Mc-t5A"/>
+                        <outlet property="dietaryFiberLable" destination="HWd-wn-yZO" id="cu4-pU-CeG"/>
                         <outlet property="photoUIImageView" destination="2Na-7g-ygc" id="k4U-VO-gt0"/>
+                        <outlet property="sugarsLable" destination="xga-ik-zOV" id="uYQ-GN-MMo"/>
+                        <outlet property="totalCarbohydrateLable" destination="Wxc-hc-iCv" id="PJr-rA-aSE"/>
+                        <outlet property="totalFatLable" destination="itp-xm-dHQ" id="KAU-s0-YTx"/>
                     </connections>
                 </viewController>
             </objects>
@@ -85,7 +194,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mD7-af-cS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Map" definesPresentationContext="YES" id="rBB-cV-WB3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="second.png" id="lEa-j2-huG"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map.png" id="lEa-j2-huG"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="7Vj-hl-d1g">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -197,7 +306,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygM-HF-oRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Menu" definesPresentationContext="YES" id="ZIc-et-uk7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Menu" image="first.png" id="bhe-iz-cLn"/>
+                    <tabBarItem key="tabBarItem" title="Menu" image="menu.png" id="bhe-iz-cLn"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="eNF-Ce-KpL">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -210,10 +319,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first.png" width="30" height="30"/>
         <image name="map.png" width="30" height="30"/>
         <image name="menu.png" width="30" height="30"/>
-        <image name="second.png" width="30" height="30"/>
         <image name="settings.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
