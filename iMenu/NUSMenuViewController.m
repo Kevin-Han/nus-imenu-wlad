@@ -418,7 +418,7 @@
     
     NUSMenuDetailViewController *menuDetail = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuDetail"];
 
-    menuDetail.dataItem = [_data objectAtIndex:indexPath.row];;
+    menuDetail.dataItem = [_data objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:menuDetail animated:YES];
 }

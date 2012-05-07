@@ -20,8 +20,9 @@
 @end
 
 @implementation NUSSettingsViewController
+@synthesize settingsTableView = _settingsTableView;
 
-@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp;
+@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp, keyboardHeight=_keyboardHeight, keyboardIsShowing=_keyboardIsShowing, currentTextField=_currentTextField;
 
 - (void)didReceiveMemoryWarning
 {
@@ -37,10 +38,12 @@
     
     // Initialize table data source
     [self tableDataSourceInit];
+    
 }
 
 - (void)viewDidUnload
 {
+    [self setSettingsTableView:nil];
     [super viewDidUnload];
     
     // Clear the point
@@ -268,40 +271,18 @@
 {  
     NSLog(@"%s tag=%d", __FUNCTION__, textField.tag);
     
-    if(textField.tag==3)
-    {
-        _centerPoint.y = self.view.center.y;
-        
-        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-60);
-    }
-    else if(textField.tag==4)
-    {
-        _centerPoint.y = self.view.center.y;
-        
-        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-120);
-    }
-    else if(textField.tag==5)
-    {
-        _centerPoint.y = self.view.center.y;
-        
-        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y-160);
-    }
-
 }  
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;  
 {  
     NSLog(@"%s", __FUNCTION__);
     
-    if(textField.tag==3 || textField.tag==4 || textField.tag==5)
-    {
-        self.view.center=CGPointMake(self.view.center.x, _centerPoint.y);
-    }
     
     [textField resignFirstResponder];
     
     return YES;
 }
+
 - (IBAction)signUp:(id)sender 
 {
     if([self validateContactSignUp])
