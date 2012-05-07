@@ -163,6 +163,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="settingsTableView" destination="ts5-q6-kQf" id="8S2-Ze-R2o"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="680" y="1124"/>
@@ -213,36 +216,6 @@
         <image name="second.png" width="30" height="30"/>
         <image name="settings.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="NUSMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="shopMap" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="NUSMenuDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailUILable" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="photoUIImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NUSMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginBarButtonAction:"/>
-                <relationship kind="action" name="orderBarButtonAction:"/>
-                <relationship kind="outlet" name="loginBarButtonItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="menuTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NUSSettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signUp:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

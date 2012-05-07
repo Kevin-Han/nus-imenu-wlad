@@ -152,10 +152,10 @@
     for(NSMutableDictionary * store  in stores)  
     {  
         
-        //NSLog(@"Name: %@",[[store objectForKey:@"StoreID"] description]);
-        //NSLog(@"PostalCode: %@",[[store objectForKey:@"PostalCode"] description]); 
-       //NSLog(@"LocationX: %@",[[store objectForKey:@"LocationX"] description]); 
-       // NSLog(@"LocatoinY: %@",[[store objectForKey:@"LocatoinY"] description]);
+        NSLog(@"Name: %@",[[store objectForKey:@"StoreID"] description]);
+        NSLog(@"PostalCode: %@",[[store objectForKey:@"PostalCode"] description]); 
+        NSLog(@"LocationX: %@",[[store objectForKey:@"LocationX"] description]); 
+        NSLog(@"LocatoinY: %@",[[store objectForKey:@"LocatoinY"] description]);
     } 
     
     
@@ -341,23 +341,33 @@
 - (void)createShopAnnotation
 {   
     _annotations=[[NSMutableArray alloc] init];
-    [self getStoreList];
+   
+    NSMutableArray *shopsArray = [[NSMutableArray alloc] initWithArray:[self getStoreList]];
+    
+    
+    NSMutableDictionary *shopA = [shopsArray objectAtIndex:0];
+    NSMutableDictionary *shopB = [shopsArray objectAtIndex:1];
+    NSMutableDictionary *shopC = [shopsArray objectAtIndex:2];
+    
     CLLocationCoordinate2D aCoordinate;
-    aCoordinate.latitude = 1.34000000;
-    aCoordinate.longitude = 103.96000000;
+    aCoordinate.latitude = [[shopA objectForKey:@"LocationX"] doubleValue] ;
+    aCoordinate.longitude = [[shopA objectForKey:@"LocatoinY"] doubleValue];
+    
+    NSLog(@"%s X=%f", __FUNCTION__, aCoordinate.latitude);
+    NSLog(@"%s Y=%f", __FUNCTION__, aCoordinate.longitude);
     
 	CLLocationCoordinate2D bCoordinate;
-    bCoordinate.latitude = 1.34500000;
-    bCoordinate.longitude = 103.96500000;
+    bCoordinate.latitude = [[shopB objectForKey:@"LocationX"] doubleValue];
+    bCoordinate.longitude = [[shopB objectForKey:@"LocatoinY"] doubleValue];
     
 	CLLocationCoordinate2D cCoordinate;
-    cCoordinate.latitude = 1.34900000;
-    cCoordinate.longitude = 103.96900000;
+    cCoordinate.latitude = [[shopC objectForKey:@"LocationX"] doubleValue];
+    cCoordinate.longitude = [[shopC objectForKey:@"LocatoinY"] doubleValue];
     
-	_aShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:aCoordinate title:@"Shop A" subtitle:@"Address A"];
-    _bShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:bCoordinate title:@"Shop B" subtitle:@"Address B"];
-    _cShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:cCoordinate title:@"Shop C" subtitle:@"Address C"];
-    
+   
+	_aShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:aCoordinate title:[shopA objectForKey:@"Name"]  subtitle:[shopA objectForKey:@"PostalCode"]];
+    _bShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:bCoordinate title:[shopB objectForKey:@"Name"]  subtitle:[shopB objectForKey:@"PostalCode"]];
+    _cShopAnnotation = [[ShopAnnotation alloc] initWithCoordinate:cCoordinate title:[shopC objectForKey:@"Name"]  subtitle:[shopC objectForKey:@"PostalCode"]];
     
 	[_shopMap addAnnotation:_aShopAnnotation];
 	[_shopMap addAnnotation:_bShopAnnotation];

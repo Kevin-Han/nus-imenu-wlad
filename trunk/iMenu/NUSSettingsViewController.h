@@ -38,5 +38,10 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 @property (nonatomic)         BOOL                  flagCancelSignUp;
 
 @property CGPoint centerPoint;
+@property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
+
+@property (nonatomic)  int keyboardHeight;
+@property (nonatomic)  BOOL keyboardIsShowing;
+@property (nonatomic, retain) UITextField *currentTextField;
 
 @end
