@@ -23,7 +23,7 @@
 
 @implementation NUSMenuViewController
 
-@synthesize flagCancelLogin=_flagCancelLogin, loginHUD=_loginHUD, username=_username, password=_password, loginBarButtonItem = _loginBarButtonItem, data=_data, menuTableView = _menuTableView;;
+@synthesize flagCancelLogin=_flagCancelLogin, loginHUD=_loginHUD, username=_username, password=_password, loginBarButtonItem=_loginBarButtonItem, data=_data, menuTableView=_menuTableView;
 
 #pragma mark - View lifecycle
 
@@ -36,11 +36,17 @@
     _menuTableView.backgroundColor = DARK_BACKGROUND;
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    // Clear the flag
+    _flagCancelLogin = 0;
+    
+    // Clear login struct
+    loginStatus.flagStatusLogin = 0;
+    memset(loginStatus.UserName, 0x00, sizeof(loginStatus.UserName));
+    
 	// Load the data.
     NSString *dataPath = [[NSBundle mainBundle] pathForResource:@"Data" ofType:@"plist"];
     
     _data = [NSArray arrayWithContentsOfFile:dataPath];
-     
 }
 
 - (void)viewDidUnload
@@ -50,57 +56,14 @@
     [self setLoginHUD:nil];
     [self setLoginBarButtonItem:nil];
     [self setData:nil];
-    
     [self setMenuTableView:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 
 #pragma mark - Action Methods
-
-#if 0
-- (IBAction)orderBarButtonAction:(id)sender 
-{
-    if([[_loginBarButtonItem title] isEqualToString:@"Login"])
-    {
-        UIAlertView *orderAlert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Login First" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil, nil];
-        
-        [orderAlert show];
-    }
-    else if([[_loginBarButtonItem title] isEqualToString:@"Logout"])
-    {
-        NSMutableDictionary *dataItem;
-        
-        NSString *orderListMsg = [[NSString alloc] init];
-        
-        
-        for(int i=0;i<6;i++)
-        {
-            dataItem = [orderList objectAtIndex:i];
-            int count = (int)[dataItem valueForKey:@"Count"];
-            if (count!=0) 
-            {
-                orderListMsg  = [orderListMsg stringByAppendingFormat:@"%@    pcs:%@\n", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
-                NSLog(@"%s Name=%@ Count=%@", __FUNCTION__, [dataItem valueForKey:@"Name"], [dataItem valueForKey:@"Count"]);
-            }
-        }
-        
-        if(orderListMsg.length==0)
-        {
-             UIAlertView *orderEmpty = [[UIAlertView alloc] initWithTitle:@"Order" message:@"Order List Empty" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [orderEmpty show];
-        }
-        else 
-        {
-            UIAlertView *orderConfirm = [[UIAlertView alloc] initWithTitle:@"Order" message:orderListMsg delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Order", nil];
-            
-            [orderConfirm show];
-        }
-    }
-}
-#endif
-
 - (IBAction)loginBarButtonAction:(id)sender
 {
     if([[_loginBarButtonItem title] isEqualToString:@"Login"])
@@ -138,120 +101,14 @@
     else if ([title isEqualToString:@"Logout"]) 
     {
         NSLog(@"%s Logout Username=%@ Password=%@", __FUNCTION__, _username, _password);
-
+        
+        // Logout and clear the struct
+        loginStatus.flagStatusLogin = 0;
+        memset(loginStatus.UserName, 0x00, sizeof(loginStatus.UserName));
+        
         [_loginBarButtonItem setTitle:@"Login"];
     }
-    else if ([title isEqualToString:@"Order"])
-    {
-        NSLog(@"%s title=%@", __FUNCTION__, title);
-        [self submitOrderToWebService];
-        
-         
-    }
 }
-
--(void) submitOrderToWebService{
-        
-        NSString *orderRequest = 
-        @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/SubmitOrder?";
-        NSString *detailsJson=@"[";
-        
-      //  NSLog(@"order list lenth%@",[orderList count]);
-        BOOL isFirstItem = TRUE;
-        for (int i =0 ; i<6; i++) {
-            NSMutableDictionary *dataItem = [orderList objectAtIndex:i];
-            int count = (int)[dataItem valueForKey:@"Count"];
-            if (count!=0) 
-            {
-                if (isFirstItem) {
-                    isFirstItem = FALSE;
-                }else {
-                    detailsJson = [detailsJson stringByAppendingFormat:@","];
-                }
-                // discount is default set to 0
-                // the price value if not set, then the web service side will get it from database
-                detailsJson  = [detailsJson stringByAppendingFormat:@"{\"ItemID\":\"%@\",\"Qty\":%@,\"Price\":0,\"DiscountAmt\":0}", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
-                NSLog(@"%s Name=%@ Count=%@", __FUNCTION__, [dataItem valueForKey:@"Name"], [dataItem valueForKey:@"Count"]);
-            }
-    
-        }
-        detailsJson = [detailsJson stringByAppendingFormat:@"]"];
-        NSLog(@"detailsJson%@",detailsJson);
-       
-        orderRequest = [orderRequest 
-                                stringByAppendingFormat:@"email=%@",_username];
-    // have to set the store id
-        orderRequest = [orderRequest 
-                                stringByAppendingFormat:@"&storeid=%@",@"1"];
-    // these two value is fixed
-        orderRequest = [orderRequest 
-                                stringByAppendingFormat:@"&isdelivery=true&status=%@",@"3"];
-    // this value should get from the input view
-        orderRequest = [orderRequest 
-                                stringByAppendingFormat:@"&deliverydate=%@",@"2012-05-06"];
-        orderRequest = [orderRequest 
-                                stringByAppendingFormat:@"&detailsJson=%@",detailsJson];
-    
-        NSLog(@"%@",orderRequest);
-    
-        
-    
-        NUSWebService *webserviceModel = [[NUSWebService alloc] init];
-        NSString *orderSubmitResult = [webserviceModel getRespone:orderRequest];
-        
-        if(orderSubmitResult==nil){
-            // pop message , the response is null
-            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                            initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertsuccessMsg show];
-           
-        }
-        
-        
-        NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getOrderResponse:orderSubmitResult]];   
-        
-        //if(jsonDic==NULL){
-            // pop message , json is not parse sucessfully
-           // return FALSE;
-            
-       // }
-        
-        NSString *result = [jsonDic objectForKey:@"result"];
-        result =[NSString stringWithFormat:@"%@",result];
-        if([@"1" isEqualToString:result])
-        {
-            NSString *orderNo = [jsonDic objectForKey:@"OrderNo"];
-            orderNo = [orderNo stringByAppendingFormat:@" order confirmation email send to your email."];
-            NSLog(@"orderNO:%@",orderNo);
-            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                        initWithTitle:@"Alert" message:orderNo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-            [alertsuccessMsg show];
-        }
-        else if([@"0" isEqualToString:result])
-        {
-            //Reason
-            NSString *reason = [jsonDic objectForKey:@"Reason"];
-            // NSLog(@"reason %@",reason);
-            // pop message the reasons
-        
-            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                        initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertsuccessMsg show];
-        
-
-        }else{
-            UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                            initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertsuccessMsg show];
-            
-        }
-
-}
-
-
-
-
 
 #pragma mark - Show login view
 - (void)showLoginView
@@ -263,11 +120,15 @@
     _loginHUD.labelText = @"Loging...";
 	_loginHUD.dimBackground = YES;
 	_loginHUD.square = YES;
-    _loginHUD.margin = 50.0;
+    _loginHUD.margin = 60.0;
     _loginHUD.delegate = self;
     _loginHUD.cancelButtonText = @"Cancel";
     
     _flagCancelLogin = 0;
+    
+    // Clear login struct
+    loginStatus.flagStatusLogin = 0;
+    memset(loginStatus.UserName, 0x00, sizeof(loginStatus.UserName));
     
     [self.view addSubview:_loginHUD];
     
@@ -278,7 +139,6 @@
 {
     
     // Do the login here currently use sleep method instead login
-    sleep(2);
     
     NSString *loginRequest = @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/Login";
     
@@ -299,6 +159,10 @@
         [_loginHUD stopIndicators];
         _loginHUD.labelText =  @"Succeed";
         _flagCancelLogin=1;
+        
+        // Set login struct
+        loginStatus.flagStatusLogin = 1;
+        memcpy(loginStatus.UserName, [_username UTF8String], [_username length]);
         [_loginBarButtonItem setTitle:@"Logout"];
     }
     else if([@"-2" isEqualToString:result])
@@ -315,28 +179,9 @@
 
     }
     
-    
-    
-    
-    /*
-    
-   if([_username isEqualToString:_password])
-    {
-        [_loginHUD stopIndicators];
-        _loginHUD.labelText =  @"Succeed";
-        _flagCancelLogin=1;
-        [_loginBarButtonItem setTitle:@"Logout"];
-    }
-    else
-    {
-        [_loginHUD stopIndicators];
-        _loginHUD.labelText =  @"Failed";
-    }
-     */
-    
     while(!_flagCancelLogin)
     { 
-        sleep(1);
+        sleep(2);
     }
 }
 

@@ -11,13 +11,13 @@
 #define ROW_HEIGHT 60
 
 @interface NUSOrderViewController ()
-
+- (void)doLogin;
+- (void)submitOrderToWebService;
 @end
 
 @implementation NUSOrderViewController
 
-@synthesize orderTableView = _orderTableView;
-@synthesize data=_data;
+@synthesize orderTableView = _orderTableView, data=_data, orderHUD=_orderHUD, flagCancelOrder=_flagCancelOrder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,11 +34,11 @@
     
     double totalPrice=0;
     
-    UIBarButtonItem *confirmBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Order" style:UIBarButtonItemStyleBordered target:self action:@selector(confirmOrder)];
+    UIBarButtonItem *submitOrderBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStyleBordered target:self action:@selector(doLogin)];
     
     _data = [[NSMutableArray alloc] init];
     
-    self.navigationItem.rightBarButtonItem = confirmBarButton;
+    self.navigationItem.rightBarButtonItem = submitOrderBarButton;
     
     for(NSMutableDictionary *dataItem in orderList)
     {
@@ -67,13 +67,154 @@
 }
 
 
-- (void)confirmOrder
+#pragma mark - Private Method
+
+- (void)doLogin
 {
+    if(!loginStatus.flagStatusLogin)
+    {
+        UIAlertView *orderAlert = [[UIAlertView alloc] initWithTitle:@"Order Alert" message:@"Login First" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil, nil];
+        
+        [orderAlert show];
+        
+        return;
+    }
     
+    if(![_data count])
+    {
+        UIAlertView *orderAlert = [[UIAlertView alloc] initWithTitle:@"Order Alert" message:@"Order List Empty" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil, nil];
+        
+        [orderAlert show];
+        
+        return;
+    }
+    
+    _orderHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    
+    _orderHUD.labelText = @"Order...";
+    _orderHUD.dimBackground = YES;
+    _orderHUD.square = YES;
+    _orderHUD.margin = 60.0;
+    _orderHUD.delegate = self;
+    _orderHUD.cancelButtonText = @"Cancle";
+    
+    _flagCancelOrder = 0;
+    
+    [self.view addSubview:_orderHUD];
+    
+    [_orderHUD showWhileExecuting:@selector(submitOrderToWebService) onTarget:self withObject:nil animated:YES];
+
 }
 
-#pragma mark -
-#pragma mark Table view methods
+- (void)submitOrderToWebService
+{
+      
+    NSString *orderRequest = @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/SubmitOrder?";
+    NSString *detailsJson=@"[";
+    
+    BOOL isFirstItem = YES;
+    
+    for (NSMutableDictionary *dataItem in _data)
+    {
+        if([[dataItem objectForKey:@"Count"] integerValue])
+        {
+            if (isFirstItem) 
+            {
+                isFirstItem = FALSE;
+            }else 
+            {
+                detailsJson = [detailsJson stringByAppendingFormat:@","];
+            }
+        
+            // discount is default set to 0
+            // the price value if not set, then the web service side will get it from database
+            detailsJson  = [detailsJson stringByAppendingFormat:@"{\"ItemID\":\"%@\",\"Qty\":%@,\"Price\":0,\"DiscountAmt\":0}", [dataItem valueForKey:@"ID"], [dataItem valueForKey:@"Count"]];
+            
+            NSLog(@"%s Name=%@ Count=%@", __FUNCTION__, [dataItem valueForKey:@"Name"], [dataItem valueForKey:@"Count"]);
+        }
+    }
+    
+    detailsJson = [detailsJson stringByAppendingFormat:@"]"];
+    
+    NSLog(@"%s detailsJson=%@", __FUNCTION__, detailsJson);
+    
+    orderRequest = [orderRequest 
+                    stringByAppendingFormat:@"email=%s", loginStatus.UserName];
+    // have to set the store id
+    orderRequest = [orderRequest 
+                    stringByAppendingFormat:@"&storeid=%@",@"1"];
+    // these two value is fixed
+    orderRequest = [orderRequest 
+                    stringByAppendingFormat:@"&isdelivery=true&status=%@",@"3"];
+    // this value should get from the input view
+    orderRequest = [orderRequest 
+                    stringByAppendingFormat:@"&deliverydate=%@",@"2012-05-06"];
+    orderRequest = [orderRequest 
+                    stringByAppendingFormat:@"&detailsJson=%@",detailsJson];
+    
+    NSLog(@"%s orderRequest=%@", __FUNCTION__, orderRequest);
+    
+    NUSWebService *webserviceModel = [[NUSWebService alloc] init];
+    NSString *orderSubmitResult = [webserviceModel getRespone:orderRequest];
+    
+    if(orderSubmitResult==nil)
+    {
+        // pop message , the response is null
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertsuccessMsg show];
+        
+    }
+    
+    
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getOrderResponse:orderSubmitResult]];   
+    
+    //if(jsonDic==NULL){
+    // pop message , json is not parse sucessfully
+    // return FALSE;
+    
+    // }
+    
+    NSString *result = [jsonDic objectForKey:@"result"];
+    result =[NSString stringWithFormat:@"%@",result];
+    if([@"1" isEqualToString:result])
+    {
+        _flagCancelOrder = 1;
+        NSString *orderNo = [jsonDic objectForKey:@"OrderNo"];
+        orderNo = [orderNo stringByAppendingFormat:@" order confirmation email send to your email."];
+        NSLog(@"orderNO:%@",orderNo);
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:orderNo delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alertsuccessMsg show];
+    }
+    else if([@"0" isEqualToString:result])
+    {
+        //Reason
+        NSString *reason = [jsonDic objectForKey:@"Reason"];
+        // NSLog(@"reason %@",reason);
+        // pop message the reasons
+        
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:reason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertsuccessMsg show];
+        
+        
+    }else{
+        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:@"repsonse is null" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertsuccessMsg show];
+        
+    }
+    
+    if(!_flagCancelOrder)
+    {
+        sleep(2);
+    }
+
+}
+
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -109,8 +250,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Configuring table view cells
+#pragma mark - Configuring table view cells
 
 #define NAME_TAG 1
 #define PRICE_TAG 2
@@ -174,7 +314,6 @@
 	return cell;
 }
 
-
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath 
 {
     NSMutableDictionary *dataItem = [_data objectAtIndex:indexPath.row];
@@ -193,7 +332,7 @@
 	
         // Set the count.
         label = (UILabel *)[cell viewWithTag:COUNT_TAG];
-        label.text =[[NSString alloc] initWithFormat:@"%@ pcs", [dataItem objectForKey:@"Count"]];
+        label.text =[[NSString alloc] initWithFormat:@"%@ Qty", [dataItem objectForKey:@"Count"]];
     }
     else  if([dataItem objectForKey:@"TotalPrice"]!=nil)
     {
@@ -202,14 +341,26 @@
         // Set the name.
         label = (UILabel *)[cell viewWithTag:NAME_TAG];
         label.text = @"Total Price:";
-        label.font = [UIFont systemFontOfSize:24];
+        label.textColor = [UIColor orangeColor];
+        label.frame = CGRectMake(60, (ROW_HEIGHT - LABEL_HEIGHT) / 2.0, 100, LABEL_HEIGHT);
         
         // Set the total price.
         label = (UILabel *)[cell viewWithTag:PRICE_TAG];
-        label.font = [UIFont systemFontOfSize:24];
-        label.text = [[NSString alloc] initWithFormat:@"S$%@", [dataItem objectForKey:@"TotalPrice"]];
+        label.text = [[NSString alloc] initWithFormat:@"S$%.02f", [[dataItem objectForKey:@"TotalPrice"] doubleValue]];
+        label.textColor = [UIColor orangeColor];
+        label.frame = CGRectMake(MIDDLE_COLUMN_OFFSET, (ROW_HEIGHT - LABEL_HEIGHT) / 2.0, MIDDLE_COLUMN_WIDTH, LABEL_HEIGHT);
     }
 }    
 
+#pragma mark - MBProgressHUD delegate
+
+- (void)hudWasHidden 
+{  
+    if(_orderHUD)
+    {
+        // Remove HUD from screen when the HUD was hidded  
+        [_orderHUD removeFromSuperview];  
+    }
+}  
 
 @end

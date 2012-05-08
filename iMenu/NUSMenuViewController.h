@@ -15,6 +15,15 @@
 #import "NUSAppDelegate.h"
 #import "SBJson.h"
 
+typedef struct 
+{
+    uint8_t UserName[128];
+    BOOL flagStatusLogin;//1 for Login, 0 for Logout
+    
+}LoginStatus_t;
+
+LoginStatus_t loginStatus;
+
 @interface NUSMenuViewController : UIViewController <MBProgressHUDDelegate>
 
 @property (nonatomic)           BOOL            flagCancelLogin;
@@ -24,11 +33,7 @@
 @property (nonatomic, retain)   NSArray         *data;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *loginBarButtonItem;
-
-//- (IBAction)orderBarButtonAction:(id)sender;
-
 - (IBAction)loginBarButtonAction:(id)sender;
-
 @property (strong, nonatomic) IBOutlet UITableView *menuTableView;
 
 

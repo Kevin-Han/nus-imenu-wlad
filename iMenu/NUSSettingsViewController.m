@@ -85,7 +85,7 @@
 	_dataSourceArray = [NSMutableArray arrayWithObjects:
                         
                         [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"Sing Up", kSectionTitleKey,
+                         @"Sign Up", kSectionTitleKey,
                          
                          [self emailUITextFieldInit], emailViewKey,
                          
@@ -294,7 +294,7 @@
         _signUpHUD.square = YES;
         _signUpHUD.margin = 60.0;
         _signUpHUD.delegate = self;
-        _signUpHUD.cancelButtonText = @"Cancle";
+        _signUpHUD.cancelButtonText = @"Return";
         
         _flagCancelSignUp = 0;
         
@@ -422,18 +422,9 @@
     
     if([@"1" isEqualToString:result])
     {
-        /*
-        UIAlertView *alertsuccessMsg = [[UIAlertView alloc]
-                                        initWithTitle:@"Alert" message:@"contact sign up success" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        
-        [alertsuccessMsg show];
-        return TRUE;*/
-
         NSLog(@"%s Sigu Up Success", __FUNCTION__);
         [_signUpHUD stopIndicators];
         _signUpHUD.labelText =  @"Succeed";
-        _flagCancelSignUp=1;
-
     }
     else if([@"0" isEqualToString:result])
     {
@@ -456,7 +447,7 @@
     
     while(!_flagCancelSignUp)
     { 
-        sleep(1);
+        sleep(2);
     }
 
 }
@@ -480,6 +471,8 @@
         [_signUpHUD removeFromSuperview];  
         
         _flagCancelSignUp = 1;
+        
+        [self.tabBarController setSelectedIndex:0];
     }
 }
 
