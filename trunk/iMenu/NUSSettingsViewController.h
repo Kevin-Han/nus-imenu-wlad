@@ -11,8 +11,6 @@
 #import "SBJson.h"
 #import "MBProgressHUD.h"
 
-#define kViewTag 1	
-
 static NSString *kSectionTitleKey           = @"SettingsTitleKey";
 
 static NSString *emailViewKey               = @"emailViewKey";
@@ -20,9 +18,10 @@ static NSString *passwdViewKey              = @"passwdViewKey";
 static NSString *confirmPasswdViewKey       = @"confirmPasswdViewKey";
 static NSString *nameViewKey                = @"nameViewKey";
 static NSString *handphoneViewKey           = @"handphoneViewKey";
+static NSString *kViewKey;
+static NSInteger kViewTag;
 
-
-@interface NUSSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MBProgressHUDDelegate>
+@interface NUSSettingsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MBProgressHUDDelegate>
 
 - (IBAction)signUp:(id)sender;
 - (IBAction)forgetPassword:(id)sender;
@@ -40,9 +39,6 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 
 @property (nonatomic)         BOOL                  flagCancelSignUp;
 @property (nonatomic)         BOOL                  flagCancelSendRequset;
-
-@property CGPoint centerPoint;
-@property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
 
 @property (nonatomic)  int keyboardHeight;
 @property (nonatomic)  BOOL keyboardIsShowing;

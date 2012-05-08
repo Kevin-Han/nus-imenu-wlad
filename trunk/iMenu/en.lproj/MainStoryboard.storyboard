@@ -261,10 +261,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="3jL-Al-2Vg" id="uzo-m6-VuJ"/>
-                            <outlet property="delegate" destination="3jL-Al-2Vg" id="t8g-nv-OV9"/>
-                        </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings.png" id="34O-JM-Gib"/>
                     <navigationItem key="navigationItem" title="Settings" id="TGZ-BB-ar8">
@@ -280,9 +276,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="settingsTableView" destination="ts5-q6-kQf" id="8S2-Ze-R2o"/>
-                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="680" y="1124"/>
@@ -331,6 +324,47 @@
         <image name="menu.png" width="30" height="30"/>
         <image name="settings.png" width="30" height="30"/>
     </resources>
+    <classes>
+        <class className="NUSMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="shopMap" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="NUSMenuDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="amountServingSizeLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="caloriesLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dietaryFiberLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="photoUIImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="sugarsLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totalCarbohydrateLable" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totalFatLable" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NUSMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSMenuViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginBarButtonAction:"/>
+                <relationship kind="outlet" name="loginBarButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="menuTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NUSOrderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSOrderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="orderTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NUSSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NUSSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="forgetPassword:"/>
+                <relationship kind="action" name="signUp:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
