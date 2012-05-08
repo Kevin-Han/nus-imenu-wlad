@@ -444,13 +444,89 @@
         _signUpHUD.labelText =  @"Sign Up Failed";
     }
     
-    
     while(!_flagCancelSignUp)
     { 
         sleep(2);
     }
 
 }
+
+-(void) doContactForgotPassword{
+    
+    
+    //http://aspspider.info/zmtun/MobileRestaurantWS.asmx/ForgetPassword?email=pattyyuanxd@gmail.com
+    NSString *contactForgotPasswordRequest = 
+    @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/ForgetPassword?";
+    
+
+    
+    //set the forgot user's email address
+    contactForgotPasswordRequest = [contactForgotPasswordRequest 
+                                    stringByAppendingFormat:@"email=%@",@"pattyyuanxd@gmail.com"];
+    
+    
+    NUSWebService *webserviceModel = [[NUSWebService alloc] init];
+    NSString *contactForgotPasswordResult = [webserviceModel getRespone:contactForgotPasswordRequest];
+    /*
+     if(contactForgotPasswordResult==nil)
+     {
+     // pop message , the response is null
+     
+     NSLog(@"%s contactForgotPasswordResult==nil", __FUNCTION__);
+     
+     [_signUpHUD stopIndicators];
+     _signUpHUD.labelText =  @"Send Request Failed";
+     }*/
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getUserSignUpResponse:contactForgotPasswordResult]];   
+    if(jsonDic==Nil)
+    {
+        // pop message , json is not parse sucessfully
+        /*
+         NSLog(@"%s jsonDic==nil", __FUNCTION__);
+         
+         [_signUpHUD stopIndicators];
+         _signUpHUD.labelText =  @"Send Request Failed";
+         */
+    }
+    
+    NSString *result = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"result"]];
+    result =[NSString stringWithFormat:@"%@",result];
+    NSLog(@"%s dicUserInfo %@",__FUNCTION__, result);
+    
+     if([@"1" isEqualToString:result])
+     {
+     NSLog(@"%s Password Send Out To Your Email", __FUNCTION__);
+     //[_signUpHUD stopIndicators];
+     //_signUpHUD.labelText =  @"Password Send Out To Your Email";
+     }
+     else if([@"0" isEqualToString:result])
+     {
+     //{"result":0,"Reason":"Could not find user information related to provided email address."}
+     
+     NSString *reason = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"Reason"]];
+     // pop message the reasons 
+         NSLog(@"doContactForgotPassword reason: %@", reason);
+     /*
+     [_signUpHUD stopIndicators];
+     _signUpHUD.labelText =  @"Send Request Failed";
+     _signUpHUD.detailsLabelText = reason;
+      
+      */
+     }
+     else
+     {
+         /*
+     [_signUpHUD stopIndicators];
+     _signUpHUD.labelText =  @"Send Request Failed";*/
+     }
+     
+   
+}
+
+
+
+
+
 
 #pragma mark - MBProgressHUD delegate
 

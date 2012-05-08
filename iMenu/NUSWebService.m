@@ -110,7 +110,7 @@
     
     result = [result substringWithRange: 
                           NSMakeRange (start.location+4, end.location-(start.location+4))];
-        
+     
     NSLog(@" getRespone:%@",result );
     
     return result;
@@ -133,5 +133,16 @@
     return jsonDic;
 
 }
+
+
+
+-(NSMutableDictionary *)getForgotPasswordResponse:(NSString *) webServiceResponse{
+    NSLog(@"webServiceResponse %@",webServiceResponse);
+    SBJsonParser * parser = [[SBJsonParser alloc] init];  
+    NSError * error = nil;  
+    NSMutableDictionary *jsonDic = [parser objectWithString:webServiceResponse error:&error];  
+	return jsonDic;
+}
+
 
 @end
