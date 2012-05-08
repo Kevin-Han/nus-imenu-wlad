@@ -20,9 +20,8 @@
 @end
 
 @implementation NUSSettingsViewController
-@synthesize settingsTableView = _settingsTableView;
 
-@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp, keyboardHeight=_keyboardHeight, keyboardIsShowing=_keyboardIsShowing, currentTextField=_currentTextField, userID=_userID, forgetPwdHUD=_forgetPwdHUD, flagCancelSendRequset=_flagCancelSendRequset;
+@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp, keyboardHeight=_keyboardHeight, keyboardIsShowing=_keyboardIsShowing, currentTextField=_currentTextField, userID=_userID, forgetPwdHUD=_forgetPwdHUD, flagCancelSendRequset=_flagCancelSendRequset;
 
 - (void)didReceiveMemoryWarning
 {
@@ -43,7 +42,6 @@
 
 - (void)viewDidUnload
 {
-    [self setSettingsTableView:nil];
     [super viewDidUnload];
     
     // Clear the point
@@ -81,25 +79,34 @@
 - (void) tableDataSourceInit
 {
     self.title = NSLocalizedString(@"Settings", @"");
-    
-	_dataSourceArray = [NSMutableArray arrayWithObjects:
+
+    _dataSourceArray = [NSArray arrayWithObjects:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Name", kSectionTitleKey,
+                             [self nameUITextFieldInit], nameViewKey,
+							 nil],
+							
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Email", kSectionTitleKey,
+                             [self emailUITextFieldInit], emailViewKey,
+                             nil],
+							
+							[NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Password", kSectionTitleKey,
+                             [self passwordUITextFieldInit], passwdViewKey,
+							 nil],
+							
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Comfirm Password", kSectionTitleKey,
+                             [self confirmPwdUITextFieldInit], confirmPasswdViewKey,
+                             nil],
                         
-                        [NSDictionary dictionaryWithObjectsAndKeys:
-                         @"Sign Up", kSectionTitleKey,
-                         
-                         [self emailUITextFieldInit], emailViewKey,
-                         
-                         [self passwordUITextFieldInit], passwdViewKey,
-                         
-                         [self confirmPwdUITextFieldInit], confirmPasswdViewKey,
-                         
-                         [self nameUITextFieldInit], nameViewKey,
-                         
-                         [self handphoneUITextFieldInit], handphoneViewKey,
-                         
-                         nil],
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"Handphone", kSectionTitleKey,
+                             [self handphoneUITextFieldInit], handphoneViewKey,
+                             nil],
                         
-                        nil];
+							nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -116,7 +123,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 1;
 }
 
 // to determine specific row height for each cell, override this.
@@ -131,65 +138,85 @@
 //
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = nil;
+    UITableViewCell *cell = nil;
+	NSUInteger row = [indexPath row];
     
-    static NSString *kDisplayCell_ID = @"DisplayCellID";
-    cell = [tableView dequeueReusableCellWithIdentifier:kDisplayCell_ID];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kDisplayCell_ID];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    else
-    {
-        // the cell is being recycled, remove old embedded controls
-        UIView *viewToRemove = nil;
-        viewToRemove = [cell.contentView viewWithTag:kViewTag];
-        if (viewToRemove)
-        {
-            [viewToRemove removeFromSuperview];
-        }
-    }
-    
-    switch([indexPath row])
+	if (row == 0)
 	{
-        case 0:
+        NSLog(@"%s step001", __FUNCTION__);
+        
+        switch (indexPath.section)
         {
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:emailViewKey];
-            [cell.contentView addSubview:control];
-            break;
+            case 0:
+                kViewKey = nameViewKey;
+                kViewTag = _nameUITextField.tag;
+                break;
+                
+            case 1:
+                kViewKey = emailViewKey;
+                kViewTag = _emailUITextField.tag;
+                break;
+                
+            case 2:
+                kViewKey = passwdViewKey;
+                kViewTag = _passwordUITextField.tag;
+                break;
+                
+            case 3:
+                kViewKey = confirmPasswdViewKey;
+                kViewTag = _confirmPwdUITextField.tag;
+                break;
+                
+            case 4:
+                kViewKey = handphoneViewKey;
+                kViewTag = _handphoneUITextField.tag;
+                break;
         }
-        case 1:
-        {
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:passwdViewKey];
-            [cell.contentView addSubview:control];
-            break;
-        }    
-        case 2:
-        {
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:confirmPasswdViewKey];
-            [cell.contentView addSubview:control];
-            break;
-        }
-        case 3:
-        {
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:nameViewKey];
-            [cell.contentView addSubview:control];
-            break;
-        }
-        case 4:
-        {
-            UIControl *control = [[_dataSourceArray objectAtIndex: indexPath.section] valueForKey:handphoneViewKey];
-            [cell.contentView addSubview:control];
-            break;
-        }
+        
+		static NSString *kCellTextField_ID = @"CellTextField_ID";
+		cell = [tableView dequeueReusableCellWithIdentifier:kCellTextField_ID];
+		if (cell == nil)
+		{
+            NSLog(@"%s step002", __FUNCTION__);
+			// a new cell needs to be created
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+										   reuseIdentifier:kCellTextField_ID];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
+		else
+		{
+            NSLog(@"%s step003", __FUNCTION__);
+			// a cell is being recycled, remove the old edit field (if it contains one of our tagged edit fields)
+			UIView *viewToCheck = nil;
+			viewToCheck = [cell.contentView viewWithTag:kViewTag];
+			if (viewToCheck)
+				[viewToCheck removeFromSuperview];
+		}
+        
+		UITextField *textField = [[self.dataSourceArray objectAtIndex: indexPath.section] valueForKey:kViewKey];
+        
+        NSLog(@"%s section=%d", __FUNCTION__, indexPath.section);
+        
+		[cell.contentView addSubview:textField];
     }
-    
-    
+  
 	return cell;
 }
 
 #pragma mark - Lazy creation of controls
+- (UITextField *) nameUITextFieldInit
+{
+    _nameUITextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 16, 260, 40)];
+    _nameUITextField.borderStyle = UITextBorderStyleRoundedRect;
+    _nameUITextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _nameUITextField.font = [UIFont fontWithName:@"System" size:30];
+    _nameUITextField.placeholder = @"Name";
+    _nameUITextField.returnKeyType = UIReturnKeyDone;
+    _nameUITextField.tag = 1;
+    _nameUITextField.delegate = self;
+    
+    return _nameUITextField;
+}
 
 
 - (UITextField *)emailUITextFieldInit
@@ -201,7 +228,7 @@
     _emailUITextField.placeholder = @"Email";
     _emailUITextField.keyboardType = UIKeyboardTypeEmailAddress; 
     _emailUITextField.returnKeyType = UIReturnKeyDone;
-    _emailUITextField.tag = 1;
+    _emailUITextField.tag = 2;
     _emailUITextField.delegate = self;
     
     return _emailUITextField;
@@ -216,7 +243,7 @@
     _passwordUITextField.placeholder = @"Password";
     _passwordUITextField.secureTextEntry = YES;
     _passwordUITextField.returnKeyType = UIReturnKeyDone;
-    _passwordUITextField.tag = 2;
+    _passwordUITextField.tag = 3;
     _passwordUITextField.delegate = self;
     
     return _passwordUITextField;
@@ -231,24 +258,10 @@
     _confirmPwdUITextField.placeholder = @"Confirm Password";
     _confirmPwdUITextField.secureTextEntry = YES;
     _confirmPwdUITextField.returnKeyType = UIReturnKeyDone;
-    _confirmPwdUITextField.tag = 3;
+    _confirmPwdUITextField.tag = 4;
     _confirmPwdUITextField.delegate = self;
     
     return _confirmPwdUITextField;
-}
-
-- (UITextField *) nameUITextFieldInit
-{
-    _nameUITextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 16, 260, 40)];
-    _nameUITextField.borderStyle = UITextBorderStyleRoundedRect;
-    _nameUITextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _nameUITextField.font = [UIFont fontWithName:@"System" size:30];
-    _nameUITextField.placeholder = @"Name";
-    _nameUITextField.returnKeyType = UIReturnKeyDone;
-    _nameUITextField.tag = 4;
-    _nameUITextField.delegate = self;
-    
-    return _nameUITextField;
 }
 
 - (UITextField *) handphoneUITextFieldInit
@@ -266,13 +279,6 @@
 }
 
 #pragma mark - UITextField Delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField  
-{  
-    NSLog(@"%s tag=%d", __FUNCTION__, textField.tag);
-    
-}  
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;  
 {  
     NSLog(@"%s", __FUNCTION__);
