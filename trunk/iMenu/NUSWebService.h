@@ -19,4 +19,5 @@
 
 -(NSMutableDictionary *)getOrderResponse:(NSString *) webServiceResponse;
 -(NSMutableArray *) getStoreResponse:(NSString *) webServiceResponse;
+-(NSMutableDictionary *)getForgotPasswordResponse:(NSString *) webServiceResponse;
 @end
