@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "NUSAppDelegate.h"
+#import "NUSWebService.h"
+#import "NUSMenuViewController.h"
 
 @interface NUSOrderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,MBProgressHUDDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderTableView;
 
 @property (nonatomic, retain) NSMutableArray *data;
+@property (nonatomic, retain) MBProgressHUD  *orderHUD;
+@property (nonatomic)         BOOL           flagCancelOrder;
 
 @end
