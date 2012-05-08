@@ -17,7 +17,7 @@
 
 @implementation NUSOrderViewController
 
-@synthesize orderTableView = _orderTableView, data=_data, orderHUD=_orderHUD, flagCancelOrder=_flagCancelOrder;
+@synthesize orderTableView = _orderTableView, data=_data, orderHUD=_orderHUD, flagCancelOrder=_flagCancelOrder, deliverDate=_deliverDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +32,22 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor=[UIColor whiteColor];
+    //公历日期选择器
+    IDJDatePickerView *djdateGregorianView=[[IDJDatePickerView alloc]initWithFrame:CGRectMake(10, 2, 300, 200) type:Gregorian1];
+    [self.view addSubview:djdateGregorianView];
+    djdateGregorianView.delegate=self;
+    
     double totalPrice=0;
+    
+    
+    NSDate* date = [NSDate date];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    _deliverDate = [formatter stringFromDate:date];
+    NSLog(@"%s deliverdate=%@", __FUNCTION__, _deliverDate);
     
     UIBarButtonItem *submitOrderBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStyleBordered target:self action:@selector(doLogin)];
     
@@ -148,7 +163,7 @@
                     stringByAppendingFormat:@"&isdelivery=true&status=%@",@"3"];
     // this value should get from the input view
     orderRequest = [orderRequest 
-                    stringByAppendingFormat:@"&deliverydate=%@",@"2012-05-06"];
+                    stringByAppendingFormat:@"&deliverydate=%@", _deliverDate];
     orderRequest = [orderRequest 
                     stringByAppendingFormat:@"&detailsJson=%@",detailsJson];
     
@@ -352,6 +367,7 @@
     }
 }    
 
+
 #pragma mark - MBProgressHUD delegate
 
 - (void)hudWasHidden 
@@ -362,5 +378,17 @@
         [_orderHUD removeFromSuperview];  
     }
 }  
+
+
+#pragma mark - IDJDatePickerViewDelegate
+
+- (void)notifyNewCalendar:(IDJCalendar *)cal
+{
+    NSLog(@"%s %@:era=%@, year=%@, month=%@, day=%@, weekday=%@", __FUNCTION__, cal, cal.era, cal.year, cal.month, cal.day, cal.weekday);
+    
+    _deliverDate = [NSString stringWithFormat:@"%04d-%02d-%02d", [cal.year integerValue], [cal.month integerValue], [cal.day integerValue]];
+    
+    NSLog(@"%s deliverdate=%@", __FUNCTION__, _deliverDate);
+}
 
 @end

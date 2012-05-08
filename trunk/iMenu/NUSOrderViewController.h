@@ -11,13 +11,16 @@
 #import "NUSAppDelegate.h"
 #import "NUSWebService.h"
 #import "NUSMenuViewController.h"
+#import "IDJDatePickerView.h"
 
-@interface NUSOrderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,MBProgressHUDDelegate>
+
+@interface NUSOrderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, IDJDatePickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderTableView;
 
 @property (nonatomic, retain) NSMutableArray *data;
 @property (nonatomic, retain) MBProgressHUD  *orderHUD;
 @property (nonatomic)         BOOL           flagCancelOrder;
+@property (nonatomic, retain) NSString       *deliverDate;
 
 @end
