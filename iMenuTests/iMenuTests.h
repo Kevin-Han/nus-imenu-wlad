@@ -8,6 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "NUSWebService.h"
+#import "NUSSettingsViewController.h"
 
 @interface iMenuTests : SenTestCase
 
