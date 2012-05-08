@@ -7,6 +7,8 @@
 //
 
 #import "NUSMenuDetailViewController.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface NUSMenuDetailViewController ()
 - (void)shareToFriends;
@@ -81,7 +83,7 @@
     {
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         
-        mailer.mailComposeDelegate = self;
+        mailer.mailComposeDelegate = (id)self;
         
         [mailer setSubject:@"Here is the good deal."];
         
