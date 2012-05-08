@@ -12,6 +12,8 @@
 
 @interface NUSMenuDetailViewController ()
 - (void)shareToFriends;
+- (void)shareBySMS;
+- (void)shareByEmail;
 @end
 
 @implementation NUSMenuDetailViewController
@@ -76,6 +78,11 @@
 
 - (void)shareToFriends
 {
+       
+}
+
+- (void)shareByEmail
+{
     NSLog(@"%s", __FUNCTION__);
     
     
@@ -87,14 +94,14 @@
         
         [mailer setSubject:@"Here is the good deal."];
         
-       // NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil;
-       // [mailer setToRecipients:toRecipients];
+        // NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil;
+        // [mailer setToRecipients:toRecipients];
         
-       // UIImage *myImage = [UIImage imageNamed:@"icon.png"];
-      //  UIImage *myImage = [UIImage imageNamed:[_dataItem objectForKey:@"Image"]];
+        // UIImage *myImage = [UIImage imageNamed:@"icon.png"];
+        //  UIImage *myImage = [UIImage imageNamed:[_dataItem objectForKey:@"Image"]];
         //UIImage *myImage = [_dataItem objectForKey:@"Image"];
-      //  NSData *imageData = UIImagePNGRepresentation(myImage);
-       // [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"];	
+        //  NSData *imageData = UIImagePNGRepresentation(myImage);
+        // [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"];	
         
         
         NSString *emailBody = @"<html><head></head><body><table><tr><td colspan=\"2\">";
@@ -128,7 +135,6 @@
     {
         [self printMessage:@"cannot SendMail"];
     }
-    
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
@@ -149,6 +155,43 @@
 			break;
 		default:
 			NSLog(@"Mail not sent");
+			break;
+	}
+    
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)shareBySMS
+{
+   // MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
+     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+	if([MFMessageComposeViewController canSendText])
+	{
+        NSString *smsBody = @"Here's the good deal from ShopName:";
+        smsBody = [smsBody stringByAppendingFormat:@"%@", [_dataItem objectForKey:@"Name"]];
+        smsBody = [smsBody stringByAppendingString:@" $"];
+        smsBody = [smsBody stringByAppendingFormat:@"%@", [_dataItem objectForKey:@"Price"]];
+
+		controller.body = smsBody;
+		controller.recipients = [NSArray arrayWithObjects:@"12345678", @"87654321", nil];
+		controller.messageComposeDelegate = (id)self;
+		[self presentModalViewController:controller animated:YES];
+	}
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+	switch (result) {
+		case MessageComposeResultCancelled:
+			NSLog(@"Cancelled");
+			break;
+		case MessageComposeResultFailed:
+            NSLog(@"SMS Failed");
+			break;
+		case MessageComposeResultSent:
+            NSLog(@"SMS Sent");
+			break;
+		default:
 			break;
 	}
     
