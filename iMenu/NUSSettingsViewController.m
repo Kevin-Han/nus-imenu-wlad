@@ -22,7 +22,7 @@
 @implementation NUSSettingsViewController
 @synthesize settingsTableView = _settingsTableView;
 
-@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp, keyboardHeight=_keyboardHeight, keyboardIsShowing=_keyboardIsShowing, currentTextField=_currentTextField;
+@synthesize dataSourceArray=_dataSourceArray, emailUITextField=_emailUITextField, passwordUITextField=_passwordUITextField, confirmPwdUITextField=_confirmPwdUITextField, centerPoint=_centerPoint, nameUITextField=_nameUITextField, handphoneUITextField=_handphoneUITextField, signUpHUD=_signUpHUD, flagCancelSignUp=_flagCancelSignUp, keyboardHeight=_keyboardHeight, keyboardIsShowing=_keyboardIsShowing, currentTextField=_currentTextField, userID=_userID, forgetPwdHUD=_forgetPwdHUD, flagCancelSendRequset=_flagCancelSendRequset;
 
 - (void)didReceiveMemoryWarning
 {
@@ -283,6 +283,9 @@
     return YES;
 }
 
+
+#pragma mark - Action Methods
+
 - (IBAction)signUp:(id)sender 
 {
     if([self validateContactSignUp])
@@ -304,6 +307,54 @@
     }
 }
 
+- (IBAction)forgetPassword:(id)sender 
+{
+    UIAlertView *forgetPwdAlert = [[UIAlertView alloc] initWithTitle:@"Forget Password" message:@"Get the password by Email" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Submit", nil];
+    
+    [forgetPwdAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    
+    [forgetPwdAlert show];
+}
+
+
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Submit"])
+    {
+        _userID = [[alertView textFieldAtIndex:0] text];
+        
+        if([self validateEmail:_userID]==0)
+        {
+            UIAlertView *alertPopMsg = [[UIAlertView alloc]
+                                        initWithTitle:@"Alert" message:@"Invalid Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [alertPopMsg show];
+        
+        }
+        else 
+        {
+            _forgetPwdHUD = [[MBProgressHUD alloc] initWithView:self.view];
+            
+            _forgetPwdHUD.labelText = @"Sending...";
+            _forgetPwdHUD.dimBackground = YES;
+            _forgetPwdHUD.square = YES;
+            _forgetPwdHUD.margin = 60.0;
+            _forgetPwdHUD.delegate = self;
+            _forgetPwdHUD.cancelButtonText = @"Return";
+            _flagCancelSendRequset = 0;
+            [self.view addSubview:_forgetPwdHUD];
+            
+            [_forgetPwdHUD showWhileExecuting:@selector(doContactForgotPassword) onTarget:self withObject:nil animated:YES];
+        
+            NSLog(@"%s UserID=%@", __FUNCTION__, _userID);
+        }
+    }
+}
+        
 - (BOOL) validateEmail: (NSString *) emailVal {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
@@ -451,14 +502,11 @@
 
 }
 
--(void) doContactForgotPassword{
-    
-    
+-(void) doContactForgotPassword
+{
     //http://aspspider.info/zmtun/MobileRestaurantWS.asmx/ForgetPassword?email=pattyyuanxd@gmail.com
     NSString *contactForgotPasswordRequest = 
     @"http://aspspider.info/zmtun/MobileRestaurantWS.asmx/ForgetPassword?";
-    
-
     
     //set the forgot user's email address
     contactForgotPasswordRequest = [contactForgotPasswordRequest 
@@ -467,66 +515,61 @@
     
     NUSWebService *webserviceModel = [[NUSWebService alloc] init];
     NSString *contactForgotPasswordResult = [webserviceModel getRespone:contactForgotPasswordRequest];
-    /*
-     if(contactForgotPasswordResult==nil)
-     {
-     // pop message , the response is null
+    
+    if(contactForgotPasswordResult==nil)
+    {
+        // pop message , the response is null
      
-     NSLog(@"%s contactForgotPasswordResult==nil", __FUNCTION__);
+        NSLog(@"%s contactForgotPasswordResult==nil", __FUNCTION__);
      
-     [_signUpHUD stopIndicators];
-     _signUpHUD.labelText =  @"Send Request Failed";
-     }*/
+        [_forgetPwdHUD stopIndicators];
+        _forgetPwdHUD.labelText =  @"Failed";
+    }
+    
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] initWithDictionary:[webserviceModel getUserSignUpResponse:contactForgotPasswordResult]];   
     if(jsonDic==Nil)
     {
         // pop message , json is not parse sucessfully
-        /*
+        
          NSLog(@"%s jsonDic==nil", __FUNCTION__);
          
-         [_signUpHUD stopIndicators];
-         _signUpHUD.labelText =  @"Send Request Failed";
-         */
+         [_forgetPwdHUD stopIndicators];
+         _forgetPwdHUD.labelText =  @"Failed";
     }
     
     NSString *result = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"result"]];
     result =[NSString stringWithFormat:@"%@",result];
     NSLog(@"%s dicUserInfo %@",__FUNCTION__, result);
     
-     if([@"1" isEqualToString:result])
-     {
-     NSLog(@"%s Password Send Out To Your Email", __FUNCTION__);
-     //[_signUpHUD stopIndicators];
-     //_signUpHUD.labelText =  @"Password Send Out To Your Email";
-     }
-     else if([@"0" isEqualToString:result])
-     {
-     //{"result":0,"Reason":"Could not find user information related to provided email address."}
+    if([@"1" isEqualToString:result])
+    {
+         NSLog(@"%s Sent out", __FUNCTION__);
+        [_forgetPwdHUD stopIndicators];
+        _forgetPwdHUD.labelText =  @"Send Out";
+    }
+    else if([@"0" isEqualToString:result])
+    {
+        //{"result":0,"Reason":"Could not find user information related to provided email address.}
      
-     NSString *reason = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"Reason"]];
-     // pop message the reasons 
-         NSLog(@"doContactForgotPassword reason: %@", reason);
-     /*
-     [_signUpHUD stopIndicators];
-     _signUpHUD.labelText =  @"Send Request Failed";
-     _signUpHUD.detailsLabelText = reason;
-      
-      */
+        NSString *reason = [[NSString alloc] initWithFormat:@"%@", [jsonDic objectForKey:@"Reason"]];
+        // pop message the reasons 
+        NSLog(@"doContactForgotPassword reason: %@", reason);
+     
+        [_forgetPwdHUD stopIndicators];
+        _forgetPwdHUD.labelText =  @"Failed";
+        _forgetPwdHUD.detailsLabelText = reason;
      }
      else
      {
-         /*
-     [_signUpHUD stopIndicators];
-     _signUpHUD.labelText =  @"Send Request Failed";*/
+         [_forgetPwdHUD stopIndicators];
+         _forgetPwdHUD.labelText =  @"Failed";
      }
-     
-   
+    
+    while(!_flagCancelSendRequset)
+    { 
+        sleep(2);
+    }
 }
-
-
-
-
-
 
 #pragma mark - MBProgressHUD delegate
 
@@ -536,6 +579,11 @@
     {
         // Remove HUD from screen when the HUD was hidded  
         [_signUpHUD removeFromSuperview];  
+    }
+    
+    if(_forgetPwdHUD)
+    {
+        [_forgetPwdHUD removeFromSuperview];
     }
 }  
 
@@ -550,6 +598,15 @@
         
         [self.tabBarController setSelectedIndex:0];
     }
+    
+    if(_forgetPwdHUD)
+    {
+        // Remove HUD from screen when the HUD was hidded  
+        [_forgetPwdHUD removeFromSuperview];  
+        
+        _flagCancelSendRequset = 1;
+    }
+        
 }
 
 

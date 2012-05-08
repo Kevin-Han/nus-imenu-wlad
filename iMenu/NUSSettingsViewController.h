@@ -25,6 +25,7 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 @interface NUSSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MBProgressHUDDelegate>
 
 - (IBAction)signUp:(id)sender;
+- (IBAction)forgetPassword:(id)sender;
 
 @property (nonatomic, retain) NSMutableArray *dataSourceArray;
 
@@ -34,8 +35,11 @@ static NSString *handphoneViewKey           = @"handphoneViewKey";
 @property (nonatomic, retain) UITextField           *nameUITextField;
 @property (nonatomic, retain) UITextField           *handphoneUITextField;
 @property (nonatomic, retain) MBProgressHUD         *signUpHUD;
+@property (nonatomic, retain) MBProgressHUD         *forgetPwdHUD;
+@property (nonatomic, retain) NSString              *userID;
 
 @property (nonatomic)         BOOL                  flagCancelSignUp;
+@property (nonatomic)         BOOL                  flagCancelSendRequset;
 
 @property CGPoint centerPoint;
 @property (strong, nonatomic) IBOutlet UITableView *settingsTableView;
