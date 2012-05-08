@@ -58,6 +58,24 @@
 		DD900D47154A58FD00BAECB2 /* LightBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DD900D3D154A58FD00BAECB2 /* LightBackground.png */; };
 		DD900D49154A58FD00BAECB2 /* StarsBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DD900D3F154A58FD00BAECB2 /* StarsBackground.png */; };
 		DD900D4A154A58FD00BAECB2 /* StarsForeground.png in Resources */ = {isa = PBXBuildFile; fileRef = DD900D40154A58FD00BAECB2 /* StarsForeground.png */; };
+		DDD8790F1558FCD1004BD482 /* IDJCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD878F01558FCD1004BD482 /* IDJCalendar.m */; };
+		DDD879101558FCD1004BD482 /* IDJCalendarUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = DDD878F21558FCD1004BD482 /* IDJCalendarUtil.mm */; };
+		DDD879111558FCD1004BD482 /* IDJChineseCalendar.mm in Sources */ = {isa = PBXBuildFile; fileRef = DDD878F41558FCD1004BD482 /* IDJChineseCalendar.mm */; };
+		DDD879121558FCD1004BD482 /* IDJDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD878F61558FCD1004BD482 /* IDJDatePickerView.m */; };
+		DDD879131558FCD1004BD482 /* IDJPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD878F91558FCD1004BD482 /* IDJPickerView.m */; };
+		DDD879141558FCD1004BD482 /* IDJScrollComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD878FB1558FCD1004BD482 /* IDJScrollComponent.m */; };
+		DDD879151558FCD1004BD482 /* date_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD878FD1558FCD1004BD482 /* date_bg.png */; };
+		DDD879161558FCD1004BD482 /* date_selection_center.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD878FE1558FCD1004BD482 /* date_selection_center.png */; };
+		DDD879171558FCD1004BD482 /* date_selection_left.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD878FF1558FCD1004BD482 /* date_selection_left.png */; };
+		DDD879181558FCD1004BD482 /* date_selection_right.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD879001558FCD1004BD482 /* date_selection_right.png */; };
+		DDD879191558FCD1004BD482 /* date_wheel_center.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD879011558FCD1004BD482 /* date_wheel_center.png */; };
+		DDD8791A1558FCD1004BD482 /* date_wheel_left.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD879021558FCD1004BD482 /* date_wheel_left.png */; };
+		DDD8791B1558FCD1004BD482 /* date_wheel_right.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD879031558FCD1004BD482 /* date_wheel_right.png */; };
+		DDD8791C1558FCD1004BD482 /* date_wheel_seperated_line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDD879041558FCD1004BD482 /* date_wheel_seperated_line.png */; };
+		DDD8791D1558FCD1004BD482 /* ChineseCalendarDB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDD879061558FCD1004BD482 /* ChineseCalendarDB.cpp */; };
+		DDD8791E1558FCD1004BD482 /* ChineseDate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDD879081558FCD1004BD482 /* ChineseDate.cpp */; };
+		DDD8791F1558FCD1004BD482 /* SolarDate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDD8790A1558FCD1004BD482 /* SolarDate.cpp */; };
+		DDD879201558FCD1004BD482 /* IDJTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD8790E1558FCD1004BD482 /* IDJTimePickerView.m */; };
 		DDEA291D15463DDC00C0B219 /* Icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = DDEA291915463DDC00C0B219 /* Icon-small.png */; };
 		DDEA291E15463DDC00C0B219 /* Icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DDEA291A15463DDC00C0B219 /* Icon-small@2x.png */; };
 		DDEA291F15463DDC00C0B219 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DDEA291B15463DDC00C0B219 /* Icon.png */; };
@@ -161,6 +179,34 @@
 		DD900D3D154A58FD00BAECB2 /* LightBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightBackground.png; sourceTree = "<group>"; };
 		DD900D3F154A58FD00BAECB2 /* StarsBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarsBackground.png; sourceTree = "<group>"; };
 		DD900D40154A58FD00BAECB2 /* StarsForeground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarsForeground.png; sourceTree = "<group>"; };
+		DDD878EF1558FCD1004BD482 /* IDJCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJCalendar.h; sourceTree = "<group>"; };
+		DDD878F01558FCD1004BD482 /* IDJCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJCalendar.m; sourceTree = "<group>"; };
+		DDD878F11558FCD1004BD482 /* IDJCalendarUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJCalendarUtil.h; sourceTree = "<group>"; };
+		DDD878F21558FCD1004BD482 /* IDJCalendarUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDJCalendarUtil.mm; sourceTree = "<group>"; };
+		DDD878F31558FCD1004BD482 /* IDJChineseCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJChineseCalendar.h; sourceTree = "<group>"; };
+		DDD878F41558FCD1004BD482 /* IDJChineseCalendar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDJChineseCalendar.mm; sourceTree = "<group>"; };
+		DDD878F51558FCD1004BD482 /* IDJDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJDatePickerView.h; sourceTree = "<group>"; };
+		DDD878F61558FCD1004BD482 /* IDJDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJDatePickerView.m; sourceTree = "<group>"; };
+		DDD878F81558FCD1004BD482 /* IDJPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJPickerView.h; sourceTree = "<group>"; };
+		DDD878F91558FCD1004BD482 /* IDJPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJPickerView.m; sourceTree = "<group>"; };
+		DDD878FA1558FCD1004BD482 /* IDJScrollComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJScrollComponent.h; sourceTree = "<group>"; };
+		DDD878FB1558FCD1004BD482 /* IDJScrollComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJScrollComponent.m; sourceTree = "<group>"; };
+		DDD878FD1558FCD1004BD482 /* date_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_bg.png; sourceTree = "<group>"; };
+		DDD878FE1558FCD1004BD482 /* date_selection_center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_selection_center.png; sourceTree = "<group>"; };
+		DDD878FF1558FCD1004BD482 /* date_selection_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_selection_left.png; sourceTree = "<group>"; };
+		DDD879001558FCD1004BD482 /* date_selection_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_selection_right.png; sourceTree = "<group>"; };
+		DDD879011558FCD1004BD482 /* date_wheel_center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_wheel_center.png; sourceTree = "<group>"; };
+		DDD879021558FCD1004BD482 /* date_wheel_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_wheel_left.png; sourceTree = "<group>"; };
+		DDD879031558FCD1004BD482 /* date_wheel_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_wheel_right.png; sourceTree = "<group>"; };
+		DDD879041558FCD1004BD482 /* date_wheel_seperated_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_wheel_seperated_line.png; sourceTree = "<group>"; };
+		DDD879061558FCD1004BD482 /* ChineseCalendarDB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChineseCalendarDB.cpp; sourceTree = "<group>"; };
+		DDD879071558FCD1004BD482 /* ChineseCalendarDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseCalendarDB.h; sourceTree = "<group>"; };
+		DDD879081558FCD1004BD482 /* ChineseDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChineseDate.cpp; sourceTree = "<group>"; };
+		DDD879091558FCD1004BD482 /* ChineseDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseDate.h; sourceTree = "<group>"; };
+		DDD8790A1558FCD1004BD482 /* SolarDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SolarDate.cpp; sourceTree = "<group>"; };
+		DDD8790B1558FCD1004BD482 /* SolarDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolarDate.h; sourceTree = "<group>"; };
+		DDD8790D1558FCD1004BD482 /* IDJTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJTimePickerView.h; sourceTree = "<group>"; };
+		DDD8790E1558FCD1004BD482 /* IDJTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJTimePickerView.m; sourceTree = "<group>"; };
 		DDEA291915463DDC00C0B219 /* Icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-small.png"; sourceTree = "<group>"; };
 		DDEA291A15463DDC00C0B219 /* Icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-small@2x.png"; sourceTree = "<group>"; };
 		DDEA291B15463DDC00C0B219 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -277,6 +323,7 @@
 		56EC44CD1544334A0060D664 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				DDD878ED1558FCD1004BD482 /* IDJDatePiker */,
 				4BB3B74515517D4700711743 /* JSON */,
 				DD900D2C154A2FDB00BAECB2 /* Cells */,
 				DD2372EE1549040A007A2210 /* MBProgressHUD */,
@@ -344,6 +391,81 @@
 				DD900D33154A301F00BAECB2 /* CompositeSubviewBasedApplicationCell.m */,
 			);
 			name = "Composite Subview";
+			sourceTree = "<group>";
+		};
+		DDD878ED1558FCD1004BD482 /* IDJDatePiker */ = {
+			isa = PBXGroup;
+			children = (
+				DDD878EE1558FCD1004BD482 /* datepicker */,
+				DDD878F71558FCD1004BD482 /* pickerview */,
+				DDD879051558FCD1004BD482 /* solar_chinese_calendar */,
+				DDD8790C1558FCD1004BD482 /* timepicker */,
+			);
+			path = IDJDatePiker;
+			sourceTree = "<group>";
+		};
+		DDD878EE1558FCD1004BD482 /* datepicker */ = {
+			isa = PBXGroup;
+			children = (
+				DDD878EF1558FCD1004BD482 /* IDJCalendar.h */,
+				DDD878F01558FCD1004BD482 /* IDJCalendar.m */,
+				DDD878F11558FCD1004BD482 /* IDJCalendarUtil.h */,
+				DDD878F21558FCD1004BD482 /* IDJCalendarUtil.mm */,
+				DDD878F31558FCD1004BD482 /* IDJChineseCalendar.h */,
+				DDD878F41558FCD1004BD482 /* IDJChineseCalendar.mm */,
+				DDD878F51558FCD1004BD482 /* IDJDatePickerView.h */,
+				DDD878F61558FCD1004BD482 /* IDJDatePickerView.m */,
+			);
+			path = datepicker;
+			sourceTree = "<group>";
+		};
+		DDD878F71558FCD1004BD482 /* pickerview */ = {
+			isa = PBXGroup;
+			children = (
+				DDD878F81558FCD1004BD482 /* IDJPickerView.h */,
+				DDD878F91558FCD1004BD482 /* IDJPickerView.m */,
+				DDD878FA1558FCD1004BD482 /* IDJScrollComponent.h */,
+				DDD878FB1558FCD1004BD482 /* IDJScrollComponent.m */,
+				DDD878FC1558FCD1004BD482 /* images */,
+			);
+			path = pickerview;
+			sourceTree = "<group>";
+		};
+		DDD878FC1558FCD1004BD482 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				DDD878FD1558FCD1004BD482 /* date_bg.png */,
+				DDD878FE1558FCD1004BD482 /* date_selection_center.png */,
+				DDD878FF1558FCD1004BD482 /* date_selection_left.png */,
+				DDD879001558FCD1004BD482 /* date_selection_right.png */,
+				DDD879011558FCD1004BD482 /* date_wheel_center.png */,
+				DDD879021558FCD1004BD482 /* date_wheel_left.png */,
+				DDD879031558FCD1004BD482 /* date_wheel_right.png */,
+				DDD879041558FCD1004BD482 /* date_wheel_seperated_line.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		DDD879051558FCD1004BD482 /* solar_chinese_calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DDD879061558FCD1004BD482 /* ChineseCalendarDB.cpp */,
+				DDD879071558FCD1004BD482 /* ChineseCalendarDB.h */,
+				DDD879081558FCD1004BD482 /* ChineseDate.cpp */,
+				DDD879091558FCD1004BD482 /* ChineseDate.h */,
+				DDD8790A1558FCD1004BD482 /* SolarDate.cpp */,
+				DDD8790B1558FCD1004BD482 /* SolarDate.h */,
+			);
+			path = solar_chinese_calendar;
+			sourceTree = "<group>";
+		};
+		DDD8790C1558FCD1004BD482 /* timepicker */ = {
+			isa = PBXGroup;
+			children = (
+				DDD8790D1558FCD1004BD482 /* IDJTimePickerView.h */,
+				DDD8790E1558FCD1004BD482 /* IDJTimePickerView.m */,
+			);
+			path = timepicker;
 			sourceTree = "<group>";
 		};
 		DDEA291815463DDC00C0B219 /* Resource */ = {
@@ -498,6 +620,14 @@
 				DD3822491553DFEA00B35E26 /* map.png in Resources */,
 				DD38224A1553DFEA00B35E26 /* menu.png in Resources */,
 				DD8616481557988300AF24EB /* MainStoryboard.storyboard in Resources */,
+				DDD879151558FCD1004BD482 /* date_bg.png in Resources */,
+				DDD879161558FCD1004BD482 /* date_selection_center.png in Resources */,
+				DDD879171558FCD1004BD482 /* date_selection_left.png in Resources */,
+				DDD879181558FCD1004BD482 /* date_selection_right.png in Resources */,
+				DDD879191558FCD1004BD482 /* date_wheel_center.png in Resources */,
+				DDD8791A1558FCD1004BD482 /* date_wheel_left.png in Resources */,
+				DDD8791B1558FCD1004BD482 /* date_wheel_right.png in Resources */,
+				DDD8791C1558FCD1004BD482 /* date_wheel_seperated_line.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +686,16 @@
 				4B98E3F91552C463004A36BC /* SBJsonUTF8Stream.m in Sources */,
 				4B98E3FA1552C463004A36BC /* SBJsonWriter.m in Sources */,
 				DD86164B1557A71D00AF24EB /* NUSOrderViewController.m in Sources */,
+				DDD8790F1558FCD1004BD482 /* IDJCalendar.m in Sources */,
+				DDD879101558FCD1004BD482 /* IDJCalendarUtil.mm in Sources */,
+				DDD879111558FCD1004BD482 /* IDJChineseCalendar.mm in Sources */,
+				DDD879121558FCD1004BD482 /* IDJDatePickerView.m in Sources */,
+				DDD879131558FCD1004BD482 /* IDJPickerView.m in Sources */,
+				DDD879141558FCD1004BD482 /* IDJScrollComponent.m in Sources */,
+				DDD8791D1558FCD1004BD482 /* ChineseCalendarDB.cpp in Sources */,
+				DDD8791E1558FCD1004BD482 /* ChineseDate.cpp in Sources */,
+				DDD8791F1558FCD1004BD482 /* SolarDate.cpp in Sources */,
+				DDD879201558FCD1004BD482 /* IDJTimePickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,7 +751,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Song (79DXNAKDYE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhijian Wang (773MF97A5F)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -626,7 +766,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C5BBEE-C976-46D5-BBFD-241B7235F46D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58404D25-144A-4B72-AC3C-5B1526FFCC1E";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -637,7 +777,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Song (79DXNAKDYE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhijian Wang (773MF97A5F)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -646,7 +786,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C5BBEE-C976-46D5-BBFD-241B7235F46D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58404D25-144A-4B72-AC3C-5B1526FFCC1E";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
