@@ -2,7 +2,7 @@
 //  NUSMapViewController.h
 //  iMenu
 //
-//  Created by Song Lei on 22/4/12.
+//  Created by Kai HAN,Song Lei on 22/4/12.
 //  Copyright (c) 2012 NUS ISS WLAD PROJECT 11. All rights reserved.
 //
 
@@ -20,7 +20,7 @@
  
 static NSString *shopAPinID = @"shopA.pin";
 
-@interface NUSMapViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,ABUnknownPersonViewControllerDelegate>
+@interface NUSMapViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,ABUnknownPersonViewControllerDelegate,UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet MKMapView *shopMap;
 
