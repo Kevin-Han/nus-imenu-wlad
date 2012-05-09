@@ -516,7 +516,7 @@
     
     //set the forgot user's email address
     contactForgotPasswordRequest = [contactForgotPasswordRequest 
-                                    stringByAppendingFormat:@"email=%@",@"pattyyuanxd@gmail.com"];
+                                    stringByAppendingFormat:@"email=%@",_userID];
     
     
     NUSWebService *webserviceModel = [[NUSWebService alloc] init];
