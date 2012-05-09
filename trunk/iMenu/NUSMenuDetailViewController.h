@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface NUSMenuDetailViewController : UIViewController
+@interface NUSMenuDetailViewController : UIViewController <UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *photoUIImageView;
 @property (strong, nonatomic) NSDictionary *dataItem;
 
