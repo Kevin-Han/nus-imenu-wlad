@@ -2,7 +2,7 @@
 //  MapAnnotation.h
 //  iMenu
 //
-//  Created by SongLei on 4/5/12.
+//  Created by Kai HAN on 4/5/12.
 //  Copyright (c) 2012 NUS ISS WLAD PROJECT 11. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  NUSMapViewController.m
 //  iMenu
 //
-//  Created by Song Lei on 22/4/12.
+//  Created by Kai HAN, Song Lei on 22/4/12.
 //  Copyright (c) 2012 NUS ISS WLAD PROJECT 11. All rights reserved.
 //
 
@@ -376,6 +376,88 @@
 	[_annotations addObject:_aShopAnnotation];
 	[_annotations addObject:_bShopAnnotation];
 	[_annotations addObject:_cShopAnnotation];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+    if([searchText length]== 0) 
+    {
+        NSLog(@"length=0");
+        [searchBar resignFirstResponder];
+    }
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{        
+    //UIAlertView *orderAlert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Login First" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil, nil];
+    
+    //[orderAlert show];
+    [self searchCoordinatesForAddress:[searchBar text]];
+    
+    //Hide the keyboard.
+    [searchBar resignFirstResponder];
+}
+
+- (void) searchCoordinatesForAddress:(NSString *)inAddress
+{
+    //Build the string to Query Google Maps.
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://maps.google.com/maps/geo?q=%@?output=json",inAddress];
+    
+    //Replace Spaces with a '+' character.
+    [urlString setString:[urlString stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    
+    //Create NSURL string from a formate URL string.
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    //Setup and start an async download.
+    //Note that we should test for reachability!.
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    [connection delete:self];
+    
+    
+}
+
+//It's called when the results of [[NSURLConnection alloc] initWithRequest:request delegate:self] come back.
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data 
+{   
+    //The string received from google's servers
+    NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    //JSON Framework magic to obtain a dictionary from the jsonString.
+    NSDictionary *results = [jsonString JSONValue];
+    
+    //Now we need to obtain our coordinates
+    NSArray *placemark  = [results objectForKey:@"Placemark"];
+    NSArray *coordinates = [[placemark objectAtIndex:0] valueForKeyPath:@"Point.coordinates"];
+    
+    double longitude = [[coordinates objectAtIndex:0] doubleValue];
+    double latitude = [[coordinates objectAtIndex:1] doubleValue];
+    
+    //Debug.
+    NSLog(@"Latitude - Longitude: %f %f", latitude, longitude);
+    
+    //zoom my map to the area in question.
+    [self zoomMapAndCenterAtLatitude:latitude andLongitude:longitude];
+    
+}
+
+- (void) zoomMapAndCenterAtLatitude:(double) latitude andLongitude:(double) longitude
+{
+    MKCoordinateRegion region;
+    region.center.latitude  = latitude;
+    region.center.longitude = longitude;
+    
+    //Set Zoom level using Span
+    MKCoordinateSpan span;
+    span.latitudeDelta  = .05;
+    span.longitudeDelta = .05;
+    region.span = span;
+    
+    //Move the map and zoom
+    [_shopMap setRegion:region animated:YES];
 }
 
 @end
