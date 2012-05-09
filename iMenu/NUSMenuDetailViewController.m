@@ -43,7 +43,8 @@
     
     self.title = [_dataItem objectForKey:@"Name"];
     
-    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleBordered target:self action:@selector(shareToFriends)];
+    //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleBordered target:self action:@selector(shareToFriends)];
+    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareToFriends)];
     
     self.navigationItem.rightBarButtonItem = shareBarButton;
     
@@ -74,17 +75,39 @@
     // Release any retained subviews of the main view.
 }
 
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
+    {
+        case 0:
+            [self shareByEmail];
+            break;
+        
+        case 1:
+            [self shareBySMS];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 #pragma mark - Private
 
 - (void)shareToFriends
 {
-       
+    UIActionSheet *sharSheet = [[UIActionSheet alloc] initWithTitle:@"Shar to friends" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share by Email", @"Share by SMS", nil];
+	sharSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	[sharSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (void)shareByEmail
 {
     NSLog(@"%s", __FUNCTION__);
-    
     
     if ([MFMailComposeViewController canSendMail])
     {
@@ -92,7 +115,7 @@
         
         mailer.mailComposeDelegate = (id)self;
         
-        [mailer setSubject:@"Here is the good deal."];
+        [mailer setSubject:@"Here is the good deal at Burger Queen."];
         
         // NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil;
         // [mailer setToRecipients:toRecipients];
@@ -167,13 +190,12 @@
      MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if([MFMessageComposeViewController canSendText])
 	{
-        NSString *smsBody = @"Here's the good deal from ShopName:";
+        NSString *smsBody = @"Here's the good deal at Burger Queen. ";
         smsBody = [smsBody stringByAppendingFormat:@"%@", [_dataItem objectForKey:@"Name"]];
         smsBody = [smsBody stringByAppendingString:@" $"];
         smsBody = [smsBody stringByAppendingFormat:@"%@", [_dataItem objectForKey:@"Price"]];
 
 		controller.body = smsBody;
-		controller.recipients = [NSArray arrayWithObjects:@"12345678", @"87654321", nil];
 		controller.messageComposeDelegate = (id)self;
 		[self presentModalViewController:controller animated:YES];
 	}
